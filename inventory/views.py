@@ -4,3 +4,12 @@ from django.http import HttpResponse
 
 def index(request):
 	return HttpResponse("Hello, world.")
+
+def createDesktop(request):
+	return HttpResponse("Hello")
+
+def thanks(request):
+	return HttpResponse("Thanks for creating a desktop.")
+
+def detailDesktop(request):
+	return HttpResponse("hello")

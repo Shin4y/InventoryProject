@@ -34,6 +34,10 @@ def createDesktop(request):
 
 		return render(request, 'inventory/createDesktop.html', {'form': form})
 
+
+#def editDesktop(request, desktop_id):
+
+
 def thanks(request):
 	return HttpResponse("Thanks for creating a desktop.")
 

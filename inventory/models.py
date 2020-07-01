@@ -5,12 +5,12 @@ from django.forms import ModelForm
 
 class commonInfo(models.Model):
 	name = models.CharField(max_length=50)
-	locationType = models.CharField(max_length=50)
+	locationType = models.CharField("Location Type", max_length=50)
 	location = models.CharField(max_length=50)
-	dateLastModified = models.DateTimeField(max_length=50)
-	lastUpdatedUser = models.CharField(max_length=50)
+	dateLastModified = models.DateTimeField("Date Last Modified", max_length=50)
+	lastUpdatedUser = models.CharField("Last Updated User", max_length=50)
 	Notes = models.CharField(max_length=100)
-	modelName = models.CharField(max_length=50)
+	modelName = models.CharField("Model Name", max_length=50)
 
 	class Meta:
 		abstract = True
@@ -19,11 +19,11 @@ class commonInfo(models.Model):
 
 class Desktops(commonInfo):
 	user = models.CharField(max_length=50)
-	serialNumber = models.CharField(max_length=50)
-	macAddress = models.CharField(max_length=50)
-	IPAddress = models.CharField(max_length=50)
-	OS = models.CharField(max_length=50)
-	userType = models.CharField(max_length=50)
+	serialNumber = models.CharField("Serial Number", max_length=50)
+	macAddress = models.CharField("Mac Address", max_length=50)
+	IPAddress = models.CharField("IP Address", max_length=50)
+	OS = models.CharField("OS Type", max_length=50)
+	userType = models.CharField("User Type", max_length=50)
 
 class DesktopForm(ModelForm):
 	class Meta:
@@ -35,13 +35,13 @@ class DesktopForm(ModelForm):
 class Notebooks(commonInfo):
 	user = models.CharField(max_length=50)
 	make = models.CharField(max_length=50)
-	modelNumber = models.CharField(max_length=50)
-	OS = models.CharField(max_length=50)
-	serialNumber = models.CharField(max_length=50)
-	manufacturedYear = models.CharField(max_length=50)
+	modelNumber = models.CharField("Model Number", max_length=50)
+	OS = models.CharField("OS Type", max_length=50)
+	serialNumber = models.CharField("Serial Number", max_length=50)
+	manufacturedYear = models.CharField("Manufactured Year", max_length=50)
 	size = models.CharField(max_length=50)
 	purpose = models.CharField(max_length=50)
-	userType = models.CharField(max_length=50)
+	userType = models.CharField("User Type", max_length=50)
 
 class NoteBookForm(ModelForm):
 	class Meta:
@@ -53,7 +53,7 @@ class NoteBookForm(ModelForm):
 class Peripherals(commonInfo):
 	user = models.CharField(max_length=50)
 	make = models.CharField(max_length=50)
-	givenDate = models.CharField(max_length=50)
+	givenDate = models.CharField("Given Date", max_length=50)
 
 class PeripheralForm(ModelForm):
 	class Meta:
@@ -64,10 +64,10 @@ class PeripheralForm(ModelForm):
 
 class Printers(commonInfo):
 	user = models.CharField(max_length=50)
-	cartridgeType = models.CharField(max_length=50)
-	macAddress = models.CharField(max_length=50)
-	givenDate = models.CharField(max_length=50)
-	serialNumber = models.CharField(max_length=50)
+	cartridgeType = models.CharField("Cartridge Type", max_length=50)
+	macAddress = models.CharField("Mac Address", max_length=50)
+	givenDate = models.CharField("Given Date", max_length=50)
+	serialNumber = models.CharField("Serial Number", max_length=50)
 	
 class PrinterForm(ModelForm):
 	class Meta:
@@ -87,7 +87,7 @@ class StationaryProjectorForm(ModelForm):
 
 
 class DesktopScanners(commonInfo):
-	serialNumber = models.CharField(max_length=50)
+	serialNumber = models.CharField("Serial Number", max_length=50)
 
 class DesktopScannersForm(ModelForm):
 	class Meta:
@@ -97,10 +97,10 @@ class DesktopScannersForm(ModelForm):
 
 	
 class DataCenterEquipment(commonInfo): #might get rid of later, theres only one entry from 2018
-	macAddress = models.CharField(max_length=50)
+	macAddress = models.CharField("Mac Address", max_length=50)
 	Type = models.CharField(max_length=50)
-	serialNumber = models.CharField(max_length=50)
-	assetTag = models.CharField(max_length=50)
+	serialNumber = models.CharField("Serial Number", max_length=50)
+	assetTag = models.CharField("Asset Tag", max_length=50)
 
 class DataCenterEquipmentForm(ModelForm):
 	class Meta:

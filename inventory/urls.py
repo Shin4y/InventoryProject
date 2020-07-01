@@ -9,4 +9,5 @@ urlpatterns = [
 	path('desktops/<int:desktop_id>/', views.detailDesktop, name = 'detailDesktop'),
 	path('desktops/createDesktop/', views.createDesktop, name = 'createDesktop'),
 	path('desktops/thanks/', views.thanks, name = 'thanks'),
+	path('desktop/<int:desktop_id>/edit/', views.editDesktop, name = 'editDesktop'),
 	]

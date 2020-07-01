@@ -28,7 +28,7 @@ class Desktops(commonInfo):
 class DesktopForm(ModelForm):
 	class Meta:
 		model = Desktops
-		fields = ['user', 'name', 'locationType', 'location', 'dateLastModified', 'lastUpdatedUser', 'Notes', 'modelName',
+		fields = ['user', 'name', 'locationType', 'location', 'Notes', 'modelName',
 		'serialNumber', 'macAddress', 'IPAddress', 'OS', 'userType']
 
 
@@ -46,7 +46,7 @@ class Notebooks(commonInfo):
 class NoteBookForm(ModelForm):
 	class Meta:
 		model = Notebooks
-		fields = ['user', 'name', 'locationType', 'location', 'dateLastModified', 'lastUpdatedUser', 'Notes', 'modelName',
+		fields = ['user', 'name', 'locationType', 'location', 'Notes', 'modelName',
 		'make', 'modelNumber', 'OS', 'serialNumber', 'manufacturedYear', 'size', 'purpose', 'userType']
 
 
@@ -58,7 +58,7 @@ class Peripherals(commonInfo):
 class PeripheralForm(ModelForm):
 	class Meta:
 		model = Peripherals
-		fields = ['user', 'name', 'locationType', 'location', 'dateLastModified', 'lastUpdatedUser', 'Notes', 'modelName',
+		fields = ['user', 'name', 'locationType', 'location', 'Notes', 'modelName',
 		'make', 'givenDate']
 
 
@@ -72,7 +72,7 @@ class Printers(commonInfo):
 class PrinterForm(ModelForm):
 	class Meta:
 		model = Printers
-		fields = ['user', 'name', 'locationType', 'location', 'dateLastModified', 'lastUpdatedUser', 'Notes', 'modelName',
+		fields = ['user', 'name', 'locationType', 'location', 'Notes', 'modelName',
 		'cartridgeType', 'macAddress' , 'givenDate', 'serialNumber']
 
 
@@ -82,7 +82,7 @@ class StationaryProjectors(commonInfo):
 class StationaryProjectorForm(ModelForm):
 	class Meta:
 		model = StationaryProjectors
-		fields = ['name', 'locationType', 'location', 'dateLastModified', 'lastUpdatedUser', 'Notes', 'modelName',
+		fields = ['name', 'locationType', 'location', 'Notes', 'modelName',
 		'bulb']
 
 
@@ -92,7 +92,7 @@ class DesktopScanners(commonInfo):
 class DesktopScannersForm(ModelForm):
 	class Meta:
 		model = DesktopScanners
-		fields = ['name', 'locationType', 'location', 'dateLastModified', 'lastUpdatedUser', 'Notes', 'modelName',
+		fields = ['name', 'locationType', 'location', 'Notes', 'modelName',
 		'serialNumber']
 
 	
@@ -105,5 +105,5 @@ class DataCenterEquipment(commonInfo): #might get rid of later, theres only one 
 class DataCenterEquipmentForm(ModelForm):
 	class Meta:
 		model = DataCenterEquipment
-		fields = ['name', 'locationType', 'location', 'dateLastModified', 'lastUpdatedUser', 'Notes', 'modelName',
+		fields = ['name', 'locationType', 'location', 'Notes', 'modelName',
 		'macAddress', 'Type', 'serialNumber', 'assetTag']

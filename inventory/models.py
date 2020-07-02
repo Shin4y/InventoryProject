@@ -11,6 +11,7 @@ class commonInfo(models.Model):
 	lastUpdatedUser = models.CharField("Last Updated User", max_length=50)
 	Notes = models.CharField(max_length=100)
 	modelName = models.CharField("Model Name", max_length=50)
+	token = models.CharField(max_length=30, default = 0)
 
 	class Meta:
 		abstract = True

@@ -69,6 +69,10 @@ def editDesktop(request, desktop_id):
 		return render(request, 'inventory/editDesktop.html', {'form': form, 'desktop': editDesktop})
 
 
+def displayAllDesktops(request):
+	allDesktops = Desktops.objects.all()
+
+	return render(request, 'inventory/displayAllDesktops.html', {'allDesktops':allDesktops})
 
 def thanks(request):
 	return HttpResponse("Thanks for creating a desktop.")

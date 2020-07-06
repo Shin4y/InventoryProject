@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Listing all desktops</title>
+
+
+
+</head>
+
+<body>
+{%load inventory_extras %}
+	<table>
+    	
+    {% for desktop in allDesktops %}
+    <tr>
+    	{% for attr,value in desktop|getDictItems %} 
+ 		<td> {{value}} </td>
+    {% endfor %}
+	</tr>
+{% endfor %}
+</table>
+</form>
+</body>
+</html>

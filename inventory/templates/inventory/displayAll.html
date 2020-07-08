@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Inventory > {{objectName}}</title>
+
+
+
+</head>
+
+<body>
+{%load inventory_extras %}
+	<table>
+    	
+    {% for object in allObjects %}
+    <tr>
+    	{% for attr,value in object|getDictItems %} 
+    	{% if not forloop.first %}
+ 		<td> {{value}} </td>
+ 		{% endif %}
+   	{% endfor %}
+	</tr>
+{% endfor %}
+</table></body>
+</html>

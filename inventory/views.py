@@ -5,54 +5,30 @@ import datetime, secrets
 from .helper import *
 from .models import *
 from collections import OrderedDict
-# Create your views here.
-
 
 
 def index(request):
 	return HttpResponse("Hello, world.")
 
 def createDesktop(request, mySlug):
-	constructor = globals()[mySlug.capitalize()]
-	subObject = constructor()
-	myList = list()
-	f = commonObjectForm(request.POST)
-	if request.method == 'POST':
-		# create a form instance and populate it with data from the request:
-		data = request.POST
-		
+	if slugIsValid(mySlug):
 
-		#for key, val in request.POST.items():
-		#	if key != 'csrfmiddlewaretoken':
-		#		f.fields[key] = forms.CharField
-		#		f.fields[key].value = val
-		# check whether it's valid:
-		
-		if f.is_valid():
-			for key, val in request.POST.items():
-				if key != 'csrfmiddlewaretoken':
-					setattr(subObject, key, val)
-					myList.append(val)
+		constructor = globals()[mySlug.capitalize()]
+		subObject = constructor()
+		myList = list()
+		if request.method == 'POST':
+			f = commonObjectForm(request.POST)
+			if f.is_valid():
+				subObject = formDataToObject(request.Post.items(), mySlug) #inserts the request data into object, and takes care of token, date, and slug as well
+				subObject.save()
+				return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
 
-			#subObject = f.save()
-			subObject.token = secrets.token_urlsafe(20)
-			subObject.dateLastModified = datetime.datetime.now()
-			subObject.slug = mySlug
-			#need to add the user thing here
-			subObject.save()
-			
-			
-			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
+		# if a GET (or any other method) we'll create a blank form
+		else:
+			f = commonObjectForm()
+			f = createDynamicForm()
 
-	# if a GET (or any other method) we'll create a blank form
-	else:
-		
-		for key in subObject._meta.fields:
-			if dontEdit(key) == False:
-				f.fields[key.name] = forms.CharField()
-
-
-		return render(request, 'inventory/createDesktop.html', {'form': f, 'mySlug': mySlug.capitalize})
+			return render(request, 'inventory/createDesktop.html', {'form': f, 'mySlug': mySlug.capitalize})
 
 
 def editDesktop(request, secret_id):
@@ -65,11 +41,6 @@ def editDesktop(request, secret_id):
 
 		if form.is_valid():
 			data = request.POST.copy()
-			#newDesktop = Desktops(name=data.get('name'), locationType=data.get('locationType'), location=data.get('name'),
-			#	dateLastModified=datetime.datetime.now(), Notes=data.get('Notes'), modelName=data.get('modelName'), user=data.get('user'),
-			#	serialNumber=data.get('serialNumber'), macAddress=data.get('macAddress'), IPAddress=data.get('IPAddress'),
-			#	OS=data.get('OS'), userType=data.get('userType'))
-			
 			editDesktop.dateLastModified = datetime.datetime.now()
 			editDesktop.name = data.get('name')
 			for field in form:
@@ -90,13 +61,14 @@ def editDesktop(request, secret_id):
 
 def displayAllObjects(request, mySlug):
 
-	allObjects = commonObject.objects.filter(slug = mySlug)
-	allSubObjects = list()
-	for object in allObjects:
-		subObject = getattr(object, 'desktops')
-		allSubObjects.append(subObject)
+	if slugIsValid(mySlug):
+		allObjects = commonObject.objects.filter(slug = mySlug)
+		allSubObjects = list()
+		for object in allObjects:
+			subObject = getattr(object, 'desktops')
+			allSubObjects.append(subObject)
 
-	return render(request, 'inventory/displayAll.html', {'allObjects':allSubObjects, 'objectName': 'Desktops'})
+		return render(request, 'inventory/displayAll.html', {'allObjects':allSubObjects, 'objectName': 'Desktops'})
 
 def detailDesktop(request, desktop_id):
 	return HttpResponse("hello")

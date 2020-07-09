@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 import datetime, secrets
 from .helper import *
 from .models import *
@@ -12,28 +13,43 @@ def index(request):
 	return HttpResponse("Hello, world.")
 
 def createDesktop(request, mySlug):
+	constructor = globals()[mySlug.capitalize()]
+	subObject = constructor()
+	myList = list()
+	f = commonObjectForm(request.POST)
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
 		data = request.POST
-		breakhere
-		# check whether it's valid:
+		
 
-		if form.is_valid():
-			newDesktop = form.save()
-			newDesktop.token = secrets.token_urlsafe(20)
-			newDesktop.time = datetime.datetime.now()
+		#for key, val in request.POST.items():
+		#	if key != 'csrfmiddlewaretoken':
+		#		f.fields[key] = forms.CharField
+		#		f.fields[key].value = val
+		# check whether it's valid:
+		
+		if f.is_valid():
+			for key, val in request.POST.items():
+				if key != 'csrfmiddlewaretoken':
+					setattr(subObject, key, val)
+					myList.append(val)
+
+			#subObject = f.save()
+			subObject.token = secrets.token_urlsafe(20)
+			subObject.dateLastModified = datetime.datetime.now()
+			subObject.slug = mySlug
 			#need to add the user thing here
-			newDesktop.save()
+			subObject.save()
 			
-			return redirect('inventory/displayAllDesktops.html')
+			
+			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
 
 	# if a GET (or any other method) we'll create a blank form
 	else:
-		f = DesktopForm()
-		constructor = globals()[mySlug.capitalize()]
-		subObject = constructor()
+		
 		for key in subObject._meta.fields:
-			f.fields[key.name] = forms.CharField()
+			if dontEdit(key) == False:
+				f.fields[key.name] = forms.CharField()
 
 
 		return render(request, 'inventory/createDesktop.html', {'form': f, 'mySlug': mySlug.capitalize})

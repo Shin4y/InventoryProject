@@ -4,14 +4,14 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Creating new {{typeOfObject}}</title>
+  <title>Creating new {{objectName}}</title>
 
 
 
 </head>
 
 <body>
-	<form action = "{% url 'inventory:createDesktop' mySlug %}" method="post">
+	<form action = "{% url 'inventory:createObject' mySlug %}" method="post">
     	{% csrf_token %}
     	<table>
     		{{ form.as_table }}

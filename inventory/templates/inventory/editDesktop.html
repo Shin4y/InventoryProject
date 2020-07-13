@@ -4,14 +4,14 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Creating new desktop</title>
+  <title>Edit {{objectName}}</title>
 
 
 
 </head>
 
 <body>
-	<form action = "{% url 'inventory:editDesktop' desktop.id %}" method="post">
+	<form action = "{% url 'inventory:editDesktop' token mySlug %}" method="post">
     	{% csrf_token %}
     	<table>
     		{{ form.as_table }}

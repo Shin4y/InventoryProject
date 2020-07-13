@@ -8,9 +8,9 @@ def dontEdit(key):
 	return True
 
 def slugIsValid(mySlug):
-	if commonObject.objects.filter(slug = mySlug) != None:
+	if commonObject.objects.filter(slug = mySlug).exists():
 		return True
-	return false
+	return False
 
 def formDataToObject(formData, mySlug, newObject):
 	constructor = globals()[mySlug.capitalize()]
@@ -32,4 +32,4 @@ def createDynamicForm(subObject):
 		if dontEdit(key) == False:
 			f.fields[key.name] = forms.CharField()
 
-	return f
+	return f             

@@ -1,4 +1,5 @@
 from .models import *
+from operator import itemgetter, attrgetter
 import datetime, secrets
 
 def dontEdit(key):
@@ -33,3 +34,18 @@ def createDynamicForm(subObject):
 			f.fields[key.name] = forms.CharField()
 
 	return f             
+
+def getAllSubObjects(mySlug):
+	allObjects = commonObject.objects.filter(slug = mySlug)
+	allSubObjects = list()
+	for object in allObjects:
+		allSubObjects.append(getattr(object, mySlug))
+
+	return allSubObjects
+
+def sortObjects(allSubObjects, sortBy):
+	sorted(allSubObjects, key = attrgetter(sortBy))
+
+	return
+
+

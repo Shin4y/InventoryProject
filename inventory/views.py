@@ -5,6 +5,7 @@ import datetime, secrets, re
 from .helper import *
 from .models import *
 from collections import OrderedDict
+from operator import itemgetter, attrgetter
 
 
 def index(request):
@@ -64,17 +65,14 @@ def editDesktop(request, secret_id, mySlug):
 		return render(request, 'inventory/editDesktop.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': mySlug })
 
 
-def displayAllObjects(request, mySlug):
-	objectName = re.sub("([a-z])([A-Z])","\g<1> \g<2>", mySlug)
+def displayAllObjects(request, mySlug, sortBy = ''):
+	objectName = re.sub("([a-z])([A-Z])","\g<1> \g<2>", mySlug) #uncamelcases the slug for visual purposes
 	objectname = objectName.lower()
 	if slugIsValid(mySlug):
-		allObjects = commonObject.objects.filter(slug = mySlug)
-		allSubObjects = list()
-		for object in allObjects:
-			subObject = getattr(object, mySlug)
-			allSubObjects.append(subObject)
+		allSubObjects = getAllSubObjects(mySlug)
+
+		if(sortBy != ''):
+			sorted(allSubObjects, key=attrgetter(sortBy))
 
 		return render(request, 'inventory/displayAll.html', {'allObjects':allSubObjects, 'objectName': objectName})
 
-def detailDesktop(request, desktop_id):
-	return HttpResponse("hello")

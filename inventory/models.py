@@ -5,13 +5,13 @@ from django import forms
 
 
 class commonObject(models.Model):
-	name = models.CharField(max_length=50)
-	locationType = models.CharField("Location Type", max_length=50)
-	location = models.CharField(max_length=50)
+	name = models.CharField(max_length=50, default = "")
+	locationType = models.CharField("Location Type", max_length=50, default = "")
+	location = models.CharField(max_length=50, default = "")
 	dateLastModified = models.DateTimeField("Date Last Modified", max_length=50, default = '2000-1-1')
-	lastUpdatedUser = models.CharField("Last Updated User", max_length=50)
+	lastUpdatedUser = models.CharField("Last Updated User", max_length=50, default = "")
 	Notes = models.CharField(max_length=100)
-	modelName = models.CharField("Model Name", max_length=50)
+	modelName = models.CharField("Model Name", max_length=50, default = "")
 	token = models.CharField(max_length=30, default = 0)
 	slug = models.SlugField(default = '')
 
@@ -24,12 +24,12 @@ class commonObjectForm(forms.ModelForm):
 
 
 class Desktops(commonObject):
-	user = models.CharField(max_length=50)
-	serialNumber = models.CharField("Serial Number", max_length=50)
-	macAddress = models.CharField("Mac Address", max_length=50)
-	IPAddress = models.CharField("IP Address", max_length=50)
-	OS = models.CharField("OS Type", max_length=50)
-	userType = models.CharField("User Type", max_length=50)
+	user = models.CharField(max_length=50, default = "")
+	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
+	macAddress = models.CharField("Mac Address", max_length=50, default = "")
+	IPAddress = models.CharField("IP Address", max_length=50, default = "")
+	OS = models.CharField("OS Type", max_length=50, default = "")
+	userType = models.CharField("User Type", max_length=50, default = "")
 
 
 

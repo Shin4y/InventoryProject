@@ -42,15 +42,15 @@ class DesktopForm(forms.ModelForm):
 
 
 class Notebooks(commonObject):
-	user = models.CharField(max_length=50)
+	user = models.CharField(max_length=50, default = "")
 	make = models.CharField(max_length=50)
-	modelNumber = models.CharField("Model Number", max_length=50)
+	modelNumber = models.CharField("Model Number", max_length=50, default = "")
 	OS = models.CharField("OS Type", max_length=50)
-	serialNumber = models.CharField("Serial Number", max_length=50)
-	manufacturedYear = models.CharField("Manufactured Year", max_length=50)
-	size = models.CharField(max_length=50)
-	purpose = models.CharField(max_length=50)
-	userType = models.CharField("User Type", max_length=50)
+	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
+	manufacturedYear = models.CharField("Manufactured Year", max_length=50, default = "")
+	size = models.CharField(max_length=50, default = "")
+	purpose = models.CharField(max_length=50, default = "")
+	userType = models.CharField("User Type", max_length=50, default = "")
 	
 
 class NoteBookForm(forms.ModelForm):
@@ -61,9 +61,9 @@ class NoteBookForm(forms.ModelForm):
 
 
 class Peripherals(commonObject):
-	user = models.CharField(max_length=50)
-	make = models.CharField(max_length=50)
-	givenDate = models.CharField("Given Date", max_length=50)
+	user = models.CharField(max_length=50, default = "")
+	make = models.CharField(max_length=50, default = "")
+	givenDate = models.DateTimeField("Given Date", max_length=50, default = "2000-1-1")
 
 
 class PeripheralForm(forms.ModelForm):
@@ -74,11 +74,11 @@ class PeripheralForm(forms.ModelForm):
 
 
 class Printers(commonObject):
-	user = models.CharField(max_length=50)
-	cartridgeType = models.CharField("Cartridge Type", max_length=50)
-	macAddress = models.CharField("Mac Address", max_length=50)
-	givenDate = models.CharField("Given Date", max_length=50)
-	serialNumber = models.CharField("Serial Number", max_length=50)
+	user = models.CharField(max_length=50, default = "")
+	cartridgeType = models.CharField("Cartridge Type", max_length=50, default = "")
+	macAddress = models.CharField("Mac Address", max_length=50, default = "")
+	givenDate = models.DateTimeField("Given Date", max_length=50, default = '2000-1-1')
+	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
 
 	
 class PrinterForm(forms.ModelForm):
@@ -100,7 +100,7 @@ class StationaryProjectorForm(forms.ModelForm):
 
 
 class DesktopScanners(commonObject):
-	serialNumber = models.CharField("Serial Number", max_length=50)
+	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
 
 	
 	
@@ -113,10 +113,10 @@ class DesktopScannersForm(forms.ModelForm):
 
 	
 class DataCenterEquipment(commonObject): #might get rid of later, theres only one entry from 2018
-	macAddress = models.CharField("Mac Address", max_length=50)
-	Type = models.CharField(max_length=50)
-	serialNumber = models.CharField("Serial Number", max_length=50)
-	assetTag = models.CharField("Asset Tag", max_length=50)
+	macAddress = models.CharField("Mac Address", max_length=50, default = "")
+	Type = models.CharField(max_length=50, default = "")
+	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
+	assetTag = models.CharField("Asset Tag", max_length=50, default = "")
 
 	
 

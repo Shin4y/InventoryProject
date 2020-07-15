@@ -31,7 +31,7 @@ def createDynamicForm(subObject):
 	f = commonObjectForm()
 	for key in subObject._meta.fields:
 		if dontEdit(key) == False:
-			f.fields[key.name] = forms.CharField()
+			f.fields[key.name] = forms.CharField(label = key.verbose_name)
 
 	return f             
 

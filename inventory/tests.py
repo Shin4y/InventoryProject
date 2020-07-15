@@ -25,6 +25,22 @@ class ObjectTestCase(TestCase):
 		self.assertEqual(r.__class__.__name__, "Desktops")
 		self.assertEqual(p.__class__.__name__, "Notebooks")
 
+	def testCreateForm(self):
+		data = {
+			'name' : 'formtest'
+			'user' : 'testperson'
+			'slug' : 'desktop'
+		}
+
+		response = self.client.POST(reverse('inventory:createObject'), data)
+		# requires some reading and testing that I don't really want to do right now for 
+		# the next 3 tests
+
+	def testEditForm(self):
+		return
+
+	def displayAllObjects(self):
+		return
 
 
 

@@ -2,7 +2,7 @@ from .models import *
 from operator import itemgetter, attrgetter
 import datetime, secrets
 
-LOCATION_CHOICES = [('Office', 'Office'), ('Lab', 'Lab'), ('Classroom', 'Classroom'), ('Other, Other')]
+#LOCATION_CHOICES = [('Office', 'Office'), ('Lab', 'Lab'), ('Classroom', 'Classroom'), ('Other, Other')]
 
 def dontEdit(key):
 	if key.name != 'commonobject_ptr' and key.name != 'slug' and key.name != 'token' and key.name != 'lastUpdatedUser' and key.name != 'dateLastModified' and key.name != 'id':
@@ -35,8 +35,6 @@ def createDynamicForm(subObject):
 		if dontEdit(key) == False:
 			if key.name != 'locationType':
 				f.fields[key.name] = forms.CharField(label = key.verbose_name)
-			else:
-				f.fields[key.name] = forms.ChoiceField(label = key.verbose_name, widget = forms.Select, choices=LOCATION_CHOICES)
 
 
 	return f             

@@ -30,7 +30,10 @@ def createObject(request, mySlug):
 		f = commonObjectForm()
 		f = createDynamicForm(subObject)
 
-		return render(request, 'inventory/createObject.html', {'form': f, 'mySlug': mySlug.capitalize})
+		objectName = re.sub("([a-z])([A-Z])","\g<1> \g<2>", mySlug)
+		objectName = objectName.lower()
+
+		return render(request, 'inventory/createObject.html', {'form': f, 'mySlug': mySlug, 'objectName': objectName})
 
 
 def editDesktop(request, secret_id, mySlug):

@@ -1,0 +1,92 @@
+#bootstrap-overrides {
+
+    /* Primary */
+    --primary-default: #337ab7;
+    /*--primary-dark: #265980;*/
+    /*--primary-light: #4DB2FF;*/
+    /*--primary-on-primary: #015493;*/
+
+    /* Secondary */
+    /*--secondary-default: #FFFFFF;*/
+    /*--secondary-dark: #803633;*/
+    /*--secondary-light: #FF6B66;*/
+    /*--secondary-on-secondary: #015493;*/
+
+    /* Neutral */
+    --neutral-1: #494B4B;
+    --neutral-2: #A9A9A9;
+    --neutral-3: #D3D3D3;
+    --neutral-4: #DDDDDD;
+    --neutral-5: #F5F5F5;
+
+    /* Text Colors */
+    /*--text-white: #FFFFFF;*/
+    /*--text-light: #DCDCDC;*/
+    /*--text-dark: #6F6F6F;*/
+    /*--text-black: #000000;*/
+
+    /* Text Styles */
+    /*--h1: normal normal bold  64px 78px Helvetica Neue, san-serif;*/
+    /*--h2: normal normal bold  32px 39px "Helvetica Neue", san-serif;*/
+    /*--h3: normal normal bold  24px 29px "Helvetica Neue", san-serif;*/
+    /*--h4: normal normal bold  18px 22px "Helvetica Neue", san-serif;*/
+    /*--h5: normal normal normal  16px 19px "Helvetica Neue", san-serif;*/
+    /*--body: normal normal bold  16px 19px "Helvetica Neue", san-serif;*/
+    /*--body-bold: normal normal bold  16px 20px "Helvetica Neue", san-serif;*/
+    /*--link-text: normal normal bold  16px 20px "Helvetica Neue", san-serif;*/
+    /*--subtext: normal normal normal  14px 17px "Helvetica Neue", san-serif;*/
+    /*--button: normal normal bold  16px 20px "Helvetica Neue", san-serif;*/
+}
+
+#bootstrap-overrides p {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+#bootstrap-overrides li {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+#bootstrap-overrides dt {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+#bootstrap-overrides dd {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+#bootstrap-overrides th {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+#bootstrap-overrides td {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #333;
+}

@@ -2,11 +2,12 @@ from django.db import models
 
 from django import forms
 
-
+LOCATION_CHOICES = [('WWH', 'WWH'), ('60FifthAve', '60FifthAve'), ('Other', 'Other')]
 
 class commonObject(models.Model):
 	name = models.CharField("Name", max_length=50, default = "")
-	locationType = models.CharField("Location Type", max_length=50, default = "")
+	locationType = models.CharField("Location Type", max_length=50, default = "", 
+		choices = LOCATION_CHOICES)
 	location = models.CharField("Location", max_length=50, default = "")
 	dateLastModified = models.DateTimeField("Date Last Modified", max_length=50, default = '2000-1-1')
 	lastUpdatedUser = models.CharField("Last Updated User", max_length=50, default = "")
@@ -24,7 +25,7 @@ class commonObjectForm(forms.ModelForm):
 
 
 class Desktops(commonObject):
-	user = models.CharField(max_length=50, default = "")
+	user = models.CharField("User", max_length=50, default = "")
 	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
 	macAddress = models.CharField("Mac Address", max_length=50, default = "")
 	IPAddress = models.CharField("IP Address", max_length=50, default = "")

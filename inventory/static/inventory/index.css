@@ -1,0 +1,185 @@
+main {
+    padding: 5px 0 30px 0;
+}
+
+aside .nav-item {
+    width: 100%;
+}
+
+aside .nav-item {
+    width: 100%;
+}
+
+aside .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+    color: #fff;
+    background-color: #337ab7;
+}
+
+aside .nav > li > a:focus, .nav > li > a:hover {
+    text-decoration: none;
+}
+
+aside .nav-pills .nav-link {
+    border-radius: .25rem;
+}
+
+aside .nav > li > a:focus, .nav > li > a:hover {
+    text-decoration: none;
+    background-color: #eee;
+}
+
+aside .nav-pills .nav-link {
+    border-radius: .25rem;
+}
+
+aside .nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+aside a:focus, a:hover {
+    color: #23527c;
+}
+
+aside a:active, a:hover {
+    outline: 0;
+}
+
+/*! CSS Used from: https://cims.nyu.edu/static/bundles/faculty.css */
+aside a {
+    color: #1f71b7;
+}
+
+aside a:focus, a:hover {
+    color: #154b7c;
+}
+
+aside a {
+    background-color: transparent;
+}
+
+aside a:active, a:hover {
+    outline: 0;
+}
+
+aside a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+aside a:focus, a:hover {
+    color: #23527c;
+    text-decoration: underline;
+}
+
+aside a:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+aside .nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+aside .nav > li > a:focus, .nav > li > a:hover {
+    text-decoration: none;
+    background-color: #eee;
+}
+
+aside .nav-pills > li > a {
+    border-radius: 4px;
+}
+
+aside .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+    color: #fff;
+    background-color: #337ab7;
+}
+
+aside a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+aside a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+aside .nav-link {
+    display: block;
+    padding: .5rem 1rem;
+}
+
+aside .nav-link:focus, .nav-link:hover {
+    text-decoration: none;
+}
+
+aside .nav-pills .nav-link {
+    border-radius: .25rem;
+}
+
+/*! CSS Used from: https://cims.nyu.edu/static/accessibility.css */
+aside a {
+    color: #1f71b7;
+}
+
+aside a:focus, a:hover {
+    color: #154b7c;
+}
+
+/*! CSS Used from: https://cims.nyu.edu/static/main.css */
+aside a {
+    color: #046dbe;
+}
+
+aside .nav-link {
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.card {
+    margin-top: 5px;
+}
+
+.card-header {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+.card-header-h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #333333;
+    font-weight: 700;
+    line-height: 1.42857143;
+}
+
+.card-block {
+    padding: 15px;
+}
+
+#student-recipients .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #333;
+    background-color: #e4e4e4;
+}
+
+.faculty-recognition-h2 {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.faculty-recognition-card-primary {
+    border-color: #337ab7;
+}
+
+.faculty-recognition-card-primary td > * {
+    font-size: 14px;
+}

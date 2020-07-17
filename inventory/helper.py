@@ -10,13 +10,13 @@ def dontEdit(key):
 
 	return True
 
-def slugIsValid(mySlug):
-	if commonObject.objects.filter(slug = mySlug).exists():
+def slugIsValid(mySlug): #Won't work if there isn't an instance of that kind of model already in the database, even if a table 
+	if commonObject.objects.filter(slug = mySlug).exists(): #for that model already exists.
 		return True
 	return False
 
-def formDataToObject(formData, mySlug, newObject):
-	constructor = globals()[mySlug.capitalize()]
+def formDataToObject(formData, mySlug, newObject):#Because forms are generalized, there is no built in method (to my knowledge)
+	constructor = globals()[mySlug.capitalize()]#that will auto create model object from form. This is the method I built to do that.
 	subObject = constructor()
 	for key, val in formData:
 		if key != 'csrfmiddlewaretoken':
@@ -29,7 +29,7 @@ def formDataToObject(formData, mySlug, newObject):
 
 	return subObject
 
-def createDynamicForm(subObject):
+def createDynamicForm(subObject): #Creates general forms by reading all the fields of a model and creating corresponding fields
 	f = commonObjectForm()
 	for key in subObject._meta.fields:
 		if dontEdit(key) == False:
@@ -39,7 +39,7 @@ def createDynamicForm(subObject):
 
 	return f             
 
-def getAllSubObjects(mySlug):
+def getAllSubObjects(mySlug): #Getting all instances of a certain slug and putting into a list
 	allObjects = commonObject.objects.filter(slug = mySlug)
 	allSubObjects = list()
 	for object in allObjects:

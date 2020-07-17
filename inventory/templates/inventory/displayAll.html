@@ -1,27 +1,20 @@
-<!doctype html>
+{% extends "base.html" %}
+{% load inventory_extras %}
 
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+{% block title %} Showing all {{objectName}} {% endblock %}
 
-  <title>Inventory > {{objectName}}</title>
+{% block content %}
 
-
-
-</head>
-
-<body>
-{%load inventory_extras %}
-	<table>
-    	
-    {% for object in allObjects %}
-    <tr>
-    	{% for attr,value in object|getDictItems %} 
-    	{% if not forloop.first %}
- 		<td> {{value}} </td>
- 		{% endif %}
-   	{% endfor %}
+<table>    	
+  {% for object in allObjects %}
+  <tr>
+  	{% for attr,value in object|getDictItems %} 
+  	{% if not forloop.first %}
+		<td> {{value}} </td>
+		{% endif %}
+ 	{% endfor %}
 	</tr>
 {% endfor %}
-</table></body>
-</html>
+</table>
+
+{% endblock %}

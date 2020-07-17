@@ -1,7 +1,7 @@
 {% extends "inventory/base.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %} {{objectName}} {% endblock %}
+{% block title %} Creating new {{objectName}} {% endblock %}
 
 {% block content %}
 <form action = "{% url 'inventory:createObject' mySlug %}" method="post">

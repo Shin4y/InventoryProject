@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
 import datetime, secrets, re
 from .helper import *
@@ -36,7 +36,7 @@ def createObject(request, mySlug):
 		return render(request, 'inventory/createObject.html', {'form': f, 'mySlug': mySlug, 'objectName': objectName})
 
 
-def editDesktop(request, secret_id, mySlug):
+def editObject(request, secret_id, mySlug):
 
 	if slugIsValid(mySlug) != True:
 		return HttpResponseNotFound(mySlug.capitalize() + " is not a valid object.")

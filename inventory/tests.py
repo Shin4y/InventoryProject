@@ -1,42 +1,51 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from inventory.models import *
+from django.urls import reverse
+
+testData = {'name':'test', 'locationType':'WWH', 'location':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
+ 'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
+
 
 class ObjectTestCase(TestCase):
 	def setUp(self):
-		desktop = Desktops.objects.create(name = "test", user = "user1", slug = "desktop")
-		notebook = Notebooks.objects.create(name = "test", user = "user2", slug = "notebooks")
+		desktop = Desktops.objects.create(name = "test", modelName = "model1", slug = "desktops")
+		notebook = Notebooks.objects.create(name = "test", modelName = "model2", slug = "notebooks")
 
-	def existsAsCommonObject(self):
+	def testExistsAsCommonObject(self):
 		commonObjects = commonObject.objects.filter(name = "test")
 		self.assertEqual(commonObjects.count(), 2)
 
-	def existsAsDesktop(self):
+	def testExistsAsDesktop(self):
 		desktop =  Desktops.objects.get(name = "test")
-		self.assertEqual(desktop.user, 'user1')
+		self.assertEqual(desktop.modelName, 'model1')
 
-	def existsAsNotebook(self):
+	def testExistsAsNotebook(self):
 		notebook = Notebooks.objects.get(name = "test")
-		self.assertEqual(notebook.user, 'user2')
+		self.assertEqual(notebook.modelName, 'model2')
 
-	def databaseLinksExist(self):
-		r = commonObject.objects.get(user = "user1")
-		p = commonObject.objects.get(user = "user2")
+	def testDatabaseLinksExist(self):
+		r = commonObject.objects.get(modelName = "model1")
+		p = commonObject.objects.get(modelName = "model2")
 		desktop = getattr(r, r.slug)
-		self.assertEqual(r.__class__.__name__, "Desktops")
-		self.assertEqual(p.__class__.__name__, "Notebooks")
+		notebook = getattr(p, p.slug)
+		self.assertEqual(desktop.__class__.__name__, "Desktops")
+		self.assertEqual(notebook.__class__.__name__, "Notebooks")
 
 	def testCreateForm(self):
-		data = {
-			'name' : 'formtest'
-			'user' : 'testperson'
-			'slug' : 'desktop'
-		}
+		 
+		c = Client()
+		response = c.post(reverse('inventory:createObject', args = ['desktops']), testData)
+		self.assertEqual(response.__class__.__name__, 'HttpResponseRedirect')
+		self.assertEqual(Desktops.objects.get(OS = 'test').macAddress, '1234')
 
-		response = self.client.POST(reverse('inventory:createObject'), data)
 		# requires some reading and testing that I don't really want to do right now for 
 		# the next 3 tests
 
 	def testEditForm(self):
+		c = Client()
+		desktop = Desktops.objects.get(OS = 'test')
+		secret = desktop.token
+		response = c.post(reverse('inventory:editObject', args = [token, 'desktops']), )
 		return
 
 	def displayAllObjects(self):

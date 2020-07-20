@@ -21,9 +21,9 @@ def createObject(request, mySlug):
 	if request.method == 'POST':
 		f = commonObjectForm(request.POST)
 		if f.is_valid():
-			subObject = formDataToObject(request.POST.items(), mySlug, True) #inserts the request data into object, and takes care of token, date, and slug as well
+			formDataToObject(subObject, request.POST.items(), mySlug, True) #inserts the request data into object, and takes care of token, date, and slug as well
 			subObject.save()
-			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug)))
+			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
 
 	# if a GET (or any other method) we'll create a blank form
 	else:

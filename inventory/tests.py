@@ -5,6 +5,8 @@ from django.urls import reverse
 testData = {'name':'test', 'locationType':'WWH', 'location':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
  'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
 
+testDataUpdate = {'name':'updated', 'locationType':'WWH', 'location':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
+ 'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
 
 class ObjectTestCase(TestCase):
 	def setUp(self):
@@ -38,17 +40,20 @@ class ObjectTestCase(TestCase):
 		self.assertEqual(response.__class__.__name__, 'HttpResponseRedirect')
 		self.assertEqual(Desktops.objects.get(OS = 'test').macAddress, '1234')
 
-		# requires some reading and testing that I don't really want to do right now for 
-		# the next 3 tests
-
 	def testEditForm(self):
 		c = Client()
+		response = c.post(reverse('inventory:createObject', args = ['desktops']), testData)
 		desktop = Desktops.objects.get(OS = 'test')
-		secret = desktop.token
-		response = c.post(reverse('inventory:editObject', args = [token, 'desktops']), )
-		return
+		response = c.post(reverse('inventory:editObject', args = ['desktops', desktop.token]), testDataUpdate)
+		self.assertEqual(Desktops.objects.get(OS = 'test').name, 'updated')
 
 	def displayAllObjects(self):
+		c = Client()
+		response = c.post(reverse('inventory:createObject', args = ['desktops']), testData)
+		response2 = c.post(reverse('inventory:createObject', args = ['desktops']), testDataUpdate)
+		response3 = c.get(reverse('inventory:displayAllObjects', args = ['desktops']))
+
+		self.assertEqual(response3.__class__, 'django.http.response.HttpResponse')
 		return
 
 

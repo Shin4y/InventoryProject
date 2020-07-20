@@ -23,7 +23,7 @@ def createObject(request, mySlug):
 		if f.is_valid():
 			subObject = formDataToObject(request.POST.items(), mySlug, True) #inserts the request data into object, and takes care of token, date, and slug as well
 			subObject.save()
-			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
+			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug)))
 
 	# if a GET (or any other method) we'll create a blank form
 	else:
@@ -52,12 +52,12 @@ def editObject(request, secret_id, mySlug):
 
 		if f.is_valid():
 
-			editObject = formDataToObject(request.POST.items(), mySlug, False)
+			formDataToObject(editObject, request.POST.items(), mySlug, False)
 			
 			editObject.dateLastModified = datetime.datetime.now()
 
 			editObject.save()
-			return HttpResponseRedirect('inventory:displayAllObjects', args = (mySlug,))
+			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
 
 	# if a GET (or any other method) we'll create a blank form
 	else:
@@ -69,7 +69,7 @@ def editObject(request, secret_id, mySlug):
 				f.value = getattr(editObject, field.name)
 
 
-		return render(request, 'inventory/editDesktop.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': mySlug })
+		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': mySlug })
 
 
 def displayAllObjects(request, mySlug, sortBy = ''):

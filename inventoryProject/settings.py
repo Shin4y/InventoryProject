@@ -25,7 +25,7 @@ SECRET_KEY = '!n@!&r_742540u6pw!x@yi(8ld4u73%ew-_9*cfte!^6&lrl_0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['testserver']
+ALLOWED_HOSTS = ['testserver', '127.0.0.1']
 
 
 # Application definition
@@ -77,13 +77,13 @@ WSGI_APPLICATION = 'inventoryProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.postgresql',
-        'ENGINE':'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        #'NAME': 'inventoryDatabase',
-        #'USER': 'postgres',
-        #'PASSWORD': 'TeamCaptain1!',
-        #'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.postgresql',
+        #'ENGINE':'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'inventoryDatabase',
+        'USER': 'postgres',
+        'PASSWORD': 'TeamCaptain1!',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

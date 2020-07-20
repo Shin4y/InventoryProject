@@ -15,19 +15,20 @@ def slugIsValid(mySlug): #Won't work if there isn't an instance of that kind of 
 		return True
 	return False
 
-def formDataToObject(formData, mySlug, newObject):#Because forms are generalized, there is no built in method (to my knowledge)
-	constructor = globals()[mySlug.capitalize()]#that will auto create model object from form. This is the method I built to do that.
-	subObject = constructor()
+def formDataToObject(editObject, formData, mySlug, newObject):#Because forms are generalized, there is no built in method (to my knowledge)
+	#constructor = globals()[mySlug.capitalize()]#that will auto create model object from form. This is the method I built to do that.
+	#subObject = constructor()
+
 	for key, val in formData:
 		if key != 'csrfmiddlewaretoken':
-			setattr(subObject, key, val)
+			setattr(editObject, key, val)
 
-	subObject.dateLastModified = datetime.datetime.now()
+	editObject.dateLastModified = datetime.datetime.now()
 	if newObject == True:
-		subObject.slug = mySlug
-		subObject.token = secrets.token_urlsafe(20)
+		editObject.slug = mySlug
+		editObject.token = secrets.token_urlsafe(20)
 
-	return subObject
+	return
 
 def createDynamicForm(subObject): #Creates general forms by reading all the fields of a model and creating corresponding fields
 	f = commonObjectForm()
@@ -51,5 +52,4 @@ def sortObjects(allSubObjects, sortBy):
 	sorted(allSubObjects, key = attrgetter(sortBy))
 
 	return
-
 

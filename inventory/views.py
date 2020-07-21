@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
-import datetime, secrets, re
+import datetime, secrets
 from .helper import *
 from .models import *
 from collections import OrderedDict
@@ -65,7 +65,7 @@ def editObject(request, secret_id, mySlug):
 		f = createDynamicForm(editObject)
 
 		for field in f:
-			if dontEdit(field):
+			if dontEdit(field.name):
 				f.value = getattr(editObject, field.name)
 
 
@@ -79,11 +79,14 @@ def displayAllObjects(request, mySlug, sortBy = ''):
 
 	objectName = re.sub("([a-z])([A-Z])","\g<1> \g<2>", mySlug) #uncamelcases the slug for visual purposes
 	objectname = objectName.lower()
+	listOfFields = getListOfFields(mySlug)
 	if slugIsValid(mySlug):
 		allSubObjects = getAllSubObjects(mySlug)
 
 		if(sortBy != ''):
 			sorted(allSubObjects, key=attrgetter(sortBy))
 
-		return render(request, 'inventory/displayAll.html', {'allObjects':allSubObjects, 'objectName': objectName})
+		bigList = list()
+		getDisplayData(allSubObjects, bigList)
+		return render(request, 'inventory/displayAll.html', {'data':bigList, 'objectName': objectName, 'listOfFields':listOfFields })
 

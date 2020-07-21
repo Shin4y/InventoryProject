@@ -54,8 +54,6 @@ class ObjectTestCase(TestCase):
 		response3 = c.get(reverse('inventory:displayAllObjects', args = ['desktops']))
 
 		self.assertEqual(response3.__class__, 'django.http.response.HttpResponse')
-		return
-
 
 
 # Create your tests here.

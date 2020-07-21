@@ -1,11 +1,12 @@
 from .models import *
 from operator import itemgetter, attrgetter
 import datetime, secrets
+import re
 
 #LOCATION_CHOICES = [('Office', 'Office'), ('Lab', 'Lab'), ('Classroom', 'Classroom'), ('Other, Other')]
 
 def dontEdit(key):
-	if key.name != 'commonobject_ptr' and key.name != 'slug' and key.name != 'token' and key.name != 'lastUpdatedUser' and key.name != 'dateLastModified' and key.name != 'id':
+	if key != 'commonobject_ptr_id' and key != 'commonobject_ptr' and key != 'slug' and key != 'token' and key != 'lastUpdatedUser' and key != 'dateLastModified' and key != 'id':
 		return False
 
 	return True
@@ -34,11 +35,11 @@ def createDynamicForm(subObject): #Creates general forms by reading all the fiel
 	f = commonObjectForm()
 	for key in subObject._meta.fields:
 		if dontEdit(key) == False:
-			if key.name != 'locationType':
-				f.fields[key.name] = forms.CharField(label = key.verbose_name)
+			if key != 'locationType':
+				f.fields[key] = forms.CharField(label = key.verbose_name)
 
 
-	return f             
+	return f
 
 def getAllSubObjects(mySlug): #Getting all instances of a certain slug and putting into a list
 	allObjects = commonObject.objects.filter(slug = mySlug)
@@ -53,3 +54,25 @@ def sortObjects(allSubObjects, sortBy):
 
 	return
 
+def getListOfFields(mySlug): #getting field names for the table in displayAll.html
+	constructor = globals()[mySlug.capitalize()]
+	subObject = constructor()
+	listOfFields = list()
+	for key in subObject._meta.fields:
+		if dontEdit(key.name) != True:
+			key.name = re.sub("([a-z])([A-Z])","\g<1> \g<2>", key.name)
+			listOfFields.append(key.name.title())
+
+	return listOfFields
+
+def getDisplayData(allSubObjects, bigList):
+	for obj in allSubObjects:
+			smallList = list()
+			first = True
+			for attr, value in obj.__dict__.items():
+				if not first and dontEdit(attr) != True:
+					smallList.append(value)
+				else:
+					first = False
+			bigList.append(smallList)
+	return 

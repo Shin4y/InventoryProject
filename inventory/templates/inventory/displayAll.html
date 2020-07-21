@@ -5,16 +5,19 @@
 
 {% block content %}
 
-<table>    	
-  {% for object in allObjects %}
-  <tr>
-  	{% for attr,value in object|getDictItems %} 
-  	{% if not forloop.first %}
-		<td> {{value}} </td>
-		{% endif %}
- 	{% endfor %}
+<table class = 'table'>
+	<tr>
+		{% for field in listOfFields %}
+		<td> {{field}} </td>
+		{% endfor %}
 	</tr>
-{% endfor %}
+	{% for obj in data %}
+    <tr>
+		{% for value in obj %} 
+			<td> {{value}} </td>
+		{% endfor %}
+	{% endfor %}
+	</tr>
 </table>
 
 {% endblock %}

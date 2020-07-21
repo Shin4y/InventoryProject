@@ -28,7 +28,7 @@ class Desktops(commonObject):
 	user = models.CharField("User", max_length=50, default = "")
 	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
 	macAddress = models.CharField("Mac Address", max_length=50, default = "")
-	IPAddress = models.CharField("IP Address", max_length=50, default = "")
+	IpAddress = models.CharField("IP Address", max_length=50, default = "")
 	OS = models.CharField("OS Type", max_length=50, default = "")
 	userType = models.CharField("User Type", max_length=50, default = "")
 

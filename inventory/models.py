@@ -2,12 +2,14 @@ from django.db import models
 
 from django import forms
 
-LOCATION_CHOICES = [('WWH', 'WWH'), ('60FifthAve', '60FifthAve'), ('Other', 'Other')]
+BUILDING_CHOICES = [('WWH', 'WWH'), ('60FifthAve', '60FifthAve'), ('Other', 'Other')]
+
 
 class commonObject(models.Model):
 	name = models.CharField("Name", max_length=50, default = "")
-	locationType = models.CharField("Location Type", max_length=50, default = "", 
-		choices = LOCATION_CHOICES)
+	#locationType = models.CharField("Location Type", max_length=50, default = "", not used often in the last inventory system, I think I'm just going to leave this out. 
+	#	choices = LOCATION_CHOICES)
+	building = models.CharField("Building", max_length=50, default ='WWH', choices = BUILDING_CHOICES)
 	location = models.CharField("Location", max_length=50, default = "")
 	dateLastModified = models.DateTimeField("Date Last Modified", max_length=50, default = '2000-1-1')
 	lastUpdatedUser = models.CharField("Last Updated User", max_length=50, default = "")
@@ -19,7 +21,7 @@ class commonObject(models.Model):
 class commonObjectForm(forms.ModelForm):
 	class Meta:
 		model = commonObject
-		fields = ['name', 'locationType', 'location', 'Notes', 'modelName']
+		fields = ['name', 'building', 'location', 'Notes', 'modelName']
 
 #class objectManager(models.Model):
 

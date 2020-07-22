@@ -86,7 +86,12 @@ def displayAllObjects(request, mySlug, sortBy = ''):
 		if(sortBy != ''):
 			sorted(allSubObjects, key=attrgetter(sortBy))
 
-		bigList = list()
+		bigList, tokenList = ([] for i in range(2))
 		getDisplayData(allSubObjects, bigList)
-		return render(request, 'inventory/displayAll.html', {'data':bigList, 'objectName': objectName, 'listOfFields':listOfFields })
+		getTokens(allSubObjects, tokenList)
 
+		masterList = zip(bigList, tokenList)
+
+		return render(request, 'inventory/displayAll.html', {'data':masterList, 'objectName': objectName, 'listOfFields':listOfFields})
+		#data is a 2d list of object data
+		#listOfFields is a list of field strings to put at the top of the table

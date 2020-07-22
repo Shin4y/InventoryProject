@@ -34,8 +34,8 @@ def formDataToObject(editObject, formData, mySlug, newObject):#Because forms are
 def createDynamicForm(subObject): #Creates general forms by reading all the fields of a model and creating corresponding fields
 	f = commonObjectForm()
 	for key in subObject._meta.fields:
-		if dontEdit(key) == False:
-			if key != 'locationType':
+		if dontEdit(key.name) == False:
+			if key.name != 'locationType': 
 				f.fields[key] = forms.CharField(label = key.verbose_name)
 
 
@@ -75,4 +75,13 @@ def getDisplayData(allSubObjects, bigList):
 				else:
 					first = False
 			bigList.append(smallList)
+
+	return 
+
+def getTokens(allSubObjects, tokenList):
+	for obj in allSubObjects:
+		for attr, value in obj.__dict__.items():
+			if attr == 'token':
+				tokenList.append(value)
+
 	return 

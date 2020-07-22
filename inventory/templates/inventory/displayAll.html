@@ -5,19 +5,24 @@
 
 {% block content %}
 
-<table class = 'table'>
-	<tr>
-		{% for field in listOfFields %}
-		<td> {{field}} </td>
+<table class = 'table table-striped table-bordered table-sm'>
+	<thead>
+		<tr>
+			{% for field in listOfFields %}
+			<th scope = "col"> {{field}} </th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for obj in data %}
+	    <tr>
+			{% for value in obj.0 %} 
+				<td> {{value}} </td>
+			{% endfor %}
+			<td><a href = 'id={{ obj.1 }}'><button type="button" class="btn btn-secondary">Edit</button></a></td>
 		{% endfor %}
-	</tr>
-	{% for obj in data %}
-    <tr>
-		{% for value in obj %} 
-			<td> {{value}} </td>
-		{% endfor %}
-	{% endfor %}
-	</tr>
+		</tr>
+	</tbody>
 </table>
 
 {% endblock %}

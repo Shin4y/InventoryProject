@@ -4,5 +4,13 @@
 
 {% block content %}
 
-
+<ul class = "list-group">
+	<a href = "{% url 'inventory:displayAllObjects' 'desktops' %} "><li class = "list-group-item"> Desktops </li></a>
+	<a href = "{% url 'inventory:displayAllObjects' 'notebooks' %}"><li class = "list-group-item"> Notebooks </li></a>
+	<a href = "{% url 'inventory:displayAllObjects' 'printers' %}"><li class = "list-group-item"> Printers </li></a>
+	<a href = "{% url 'inventory:displayAllObjects' 'peripherals' %}"><li class = "list-group-item"> Peripherals </li></a>
+	<a href = "{% url 'inventory:displayAllObjects' 'stationaryProjectors' %}"><li class = "list-group-item"> Stationary Projectors </li></a>
+	<a href = "{% url 'inventory:displayAllObjects' 'desktopScanners' %}"><li class = "list-group-item"> Desktop Scanners </li></a>
+	<a href = "{% url 'inventory:displayAllObjects' 'dataCenterEquipment' %}"><li class = "list-group-item"> Data Center Equipment </li></a>
+</ul>
 {% endblock %}

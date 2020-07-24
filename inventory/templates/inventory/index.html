@@ -1,16 +1,18 @@
-{% extends "base.html" %}
+{% extends "inventory/base.html" %}
 
 {% block title %} Inventory {% endblock %}
 
 {% block content %}
 
+<div class = "table-responsive"> 
 <ul class = "list-group">
-	<a href = "{% url 'inventory:displayAllObjects' 'desktops' %} "><li class = "list-group-item"> Desktops </li></a>
-	<a href = "{% url 'inventory:displayAllObjects' 'notebooks' %}"><li class = "list-group-item"> Notebooks </li></a>
-	<a href = "{% url 'inventory:displayAllObjects' 'printers' %}"><li class = "list-group-item"> Printers </li></a>
-	<a href = "{% url 'inventory:displayAllObjects' 'peripherals' %}"><li class = "list-group-item"> Peripherals </li></a>
-	<a href = "{% url 'inventory:displayAllObjects' 'stationaryProjectors' %}"><li class = "list-group-item"> Stationary Projectors </li></a>
-	<a href = "{% url 'inventory:displayAllObjects' 'desktopScanners' %}"><li class = "list-group-item"> Desktop Scanners </li></a>
-	<a href = "{% url 'inventory:displayAllObjects' 'dataCenterEquipment' %}"><li class = "list-group-item"> Data Center Equipment </li></a>
+	<a href = "{% url 'inventory:displayAllObjects' 'desktops' %} " class="list-group-item list-group-item-action"> Desktops </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'notebooks' %}" class="list-group-item list-group-item-action"> Notebooks </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'printers' %}" class="list-group-item list-group-item-action"> Printers </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'peripherals' %}" class="list-group-item list-group-item-action"> Peripherals </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'stationaryProjectors' %}" class="list-group-item list-group-item-action"> Stationary Projectors </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'desktopScanners' %}" class="list-group-item list-group-item-action"> Desktop Scanners </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'dataCenterEquipment' %}" class="list-group-item list-group-item-action"> Data Center Equipment </a>
 </ul>
+</div>
 {% endblock %}

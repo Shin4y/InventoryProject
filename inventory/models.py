@@ -6,11 +6,11 @@ BUILDING_CHOICES = [('WWH', 'WWH'), ('60FifthAve', '60FifthAve'), ('Other', 'Oth
 
 
 class commonObject(models.Model):
-	name = models.CharField("Name", max_length=50, default = "")
 	#locationType = models.CharField("Location Type", max_length=50, default = "", not used often in the last inventory system, I think I'm just going to leave this out. 
 	#	choices = LOCATION_CHOICES)
 	building = models.CharField("Building", max_length=50, default ='WWH', choices = BUILDING_CHOICES)
-	location = models.CharField("Location", max_length=50, default = "")
+	name = models.CharField("Name", max_length=50, default = "")
+	room = models.CharField("Location", max_length=50, default = "")
 	dateLastModified = models.DateTimeField("Date Last Modified", max_length=50, default = '2000-1-1')
 	lastUpdatedUser = models.CharField("Last Updated User", max_length=50, default = "")
 	Notes = models.CharField(max_length=100)
@@ -21,7 +21,7 @@ class commonObject(models.Model):
 class commonObjectForm(forms.ModelForm):
 	class Meta:
 		model = commonObject
-		fields = ['name', 'building', 'location', 'Notes', 'modelName']
+		fields = ['name', 'building', 'room', 'Notes', 'modelName']
 
 #class objectManager(models.Model):
 

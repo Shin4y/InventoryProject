@@ -4,9 +4,11 @@
 {% block title %} Editing {{objectName}} {% endblock %}
 
 {% block content %}
+<div class = form-group>
 <form action = "{% url 'inventory:editObject' mySlug token %}" method="post">
     {% csrf_token %}
     {{ form|crispy }}
     <input type="submit" value="Submit">
 </form>
+</div>
 {% endblock %}

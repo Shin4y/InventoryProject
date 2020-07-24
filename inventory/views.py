@@ -9,7 +9,7 @@ from operator import itemgetter, attrgetter
 
 
 def index(request):
-	return HttpResponse("Hello, world.")
+	return render(request, 'inventory/index.html')
 
 def createObject(request, mySlug):
 	if slugIsValid(mySlug) != True:
@@ -95,3 +95,9 @@ def displayAllObjects(request, mySlug, sortBy = ''):
 		return render(request, 'inventory/displayAll.html', {'data':masterList, 'objectName': objectName, 'listOfFields':listOfFields})
 		#data is a 2d list of object data
 		#listOfFields is a list of field strings to put at the top of the table
+
+def faviconView(request):	
+	faviconView = RedirectView.as_view(url='/static/inventory/images/favicon.ico', permanent=True)
+
+def batchReplace(request, mySlug):
+	return

@@ -33,12 +33,13 @@ def formDataToObject(editObject, formData, mySlug, newObject):#Because forms are
 
 def createDynamicForm(subObject): #Creates general forms by reading all the fields of a model and creating corresponding fields
 	f = commonObjectForm()
+	z = 0
 	for key in subObject._meta.fields:
 		if dontEdit(key.name) == False:
-			if key.name != 'locationType': 
-				f.fields[key] = forms.CharField(label = key.verbose_name)
+			if key.name != 'building': 
+				f.fields[key.name] = forms.CharField(label = key.verbose_name)
 
-
+	z = f.fields['building']			
 	return f
 
 def getAllSubObjects(mySlug): #Getting all instances of a certain slug and putting into a list

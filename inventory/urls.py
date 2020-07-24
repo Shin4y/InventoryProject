@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import url
 
 from . import views
 
@@ -10,4 +11,5 @@ urlpatterns = [
 	path('<slug:mySlug>/create/', views.createObject, name = 'createObject'),
 	path('<slug:mySlug>/', views.displayAllObjects, name = 'displayAllObjects'),
 	path('<slug:mySlug>/sort=<str:sortBy>/', views.displayAllObjects, name = 'displayAllObjects'),
+
 	]

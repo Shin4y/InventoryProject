@@ -78,4 +78,9 @@ class DataCenterEquipment(commonObject): #might get rid of later, theres only on
 	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
 	assetTag = models.CharField("Asset Tag", max_length=50, default = "")
 
-	
+
+##########################################################################################
+
+class batchForm(forms.Form): #a form used to swap name 1 and name 2 machines. names refer to the name field of said machines
+	name1 = forms.CharField(max_length=50)
+	name2 = forms.CharField(max_length=50)

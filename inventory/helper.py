@@ -37,9 +37,9 @@ def createDynamicForm(subObject): #Creates general forms by reading all the fiel
 	for key in subObject._meta.fields:
 		if dontEdit(key.name) == False:
 			if key.name != 'building': 
-				f.fields[key.name] = forms.CharField(label = key.verbose_name)
+				f.fields[key.name] = forms.CharField(initial = getattr(subObject, key.name), label = key.verbose_name)
 
-	z = f.fields['building']			
+	f.fields['building'].initial = getattr(subObject, 'building')			
 	return f
 
 def getAllSubObjects(mySlug): #Getting all instances of a certain slug and putting into a list

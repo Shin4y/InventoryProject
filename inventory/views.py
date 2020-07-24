@@ -6,6 +6,7 @@ from .helper import *
 from .models import *
 from collections import OrderedDict
 from operator import itemgetter, attrgetter
+from django.forms import formset_factory
 
 
 def index(request):
@@ -66,7 +67,7 @@ def editObject(request, secret_id, mySlug):
 
 		for field in f:
 			if dontEdit(field.name):
-				f.value = getattr(editObject, field.name)
+				field.value = getattr(editObject, field.name)
 
 
 		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': mySlug })
@@ -100,4 +101,15 @@ def faviconView(request):
 	faviconView = RedirectView.as_view(url='/static/inventory/images/favicon.ico', permanent=True)
 
 def batchReplace(request, mySlug):
+	if request.method == "POST":
+		return
+		#something
+	else:
+		replaceFormSet = formset_factory(replaceForm)
+		f = commonObjectForm()
+		return render(request, 'inventory/batchReplace.html', {'form' : f})
+
+	return
+
+def toStorage(request, mySlug, name):
 	return

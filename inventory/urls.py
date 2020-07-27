@@ -11,5 +11,5 @@ urlpatterns = [
 	path('<slug:mySlug>/create/', views.createObject, name = 'createObject'),
 	path('<slug:mySlug>/', views.displayAllObjects, name = 'displayAllObjects'),
 	path('<slug:mySlug>/sort=<str:sortBy>/', views.displayAllObjects, name = 'displayAllObjects'),
-
+	path('<slug:mySlug>/batch/', views.batchReplace, name = 'batchReplace'),
 	]

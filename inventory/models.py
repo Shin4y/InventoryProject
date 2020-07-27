@@ -81,6 +81,21 @@ class DataCenterEquipment(commonObject): #might get rid of later, theres only on
 
 ##########################################################################################
 
-class batchForm(forms.Form): #a form used to swap name 1 and name 2 machines. names refer to the name field of said machines
+class BatchForm(forms.Form): #a form used to swap name 1 and name 2 machines. names refer to the name field of said machines
 	name1 = forms.CharField(max_length=50)
 	name2 = forms.CharField(max_length=50)
+	extra_field_count = forms.CharField(widget=forms.HiddenInput())
+
+	def __init__(self, *args, **kwargs):
+		extra_fields = kwargs.pop('extra', 0)
+
+		super(BatchForm, self).__init__(*args, **kwargs)
+		self.fields['extra_field_count'].initial = extra_fields
+
+		for index in range(int(extra_fields)):
+			# generate extra fields in the number specified via extra_fields
+			self.fields['extra_field_{index}'.format(index=index)] = \
+				forms.CharField()
+
+
+	

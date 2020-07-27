@@ -105,9 +105,8 @@ def batchReplace(request, mySlug):
 		return
 		#something
 	else:
-		replaceFormSet = formset_factory(replaceForm)
-		f = commonObjectForm()
-		return render(request, 'inventory/batchReplace.html', {'form' : f})
+		form = BatchForm()
+		return render(request, 'inventory/batchReplace.html', {'form' : form, 'mySlug': mySlug})
 
 	return
 

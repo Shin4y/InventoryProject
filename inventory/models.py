@@ -1,7 +1,7 @@
 from django.db import models
 from crispy_forms.helper import FormHelper
 from django import forms
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field
 from crispy_forms.bootstrap import StrictButton
 
 BUILDING_CHOICES = [('WWH', 'WWH'), ('60FifthAve', '60FifthAve'), ('Other', 'Other')]
@@ -96,11 +96,13 @@ class BatchForm(forms.Form): #a form used to swap name 1 and name 2 machines. na
 		self.helper.form_class = 'form-horizontal'
 		self.helper.label_class = 'col-md-1'
 		self.helper.field_class = 'col-md-3'
+		self.helper.form_show_labels = False
+		self.helper.render_hidden_fields = True
 		self.fields['extra_field_count'].initial = extra_fields
 
 		self.helper.layout = Layout(
-		    'name1',
-		    'name2'
+		    Field('name1', placeholder = 'Name 1'),
+		    Field('name2', placeholder = 'Name 2')
 		)
 
 		for index in range(int(extra_fields)):

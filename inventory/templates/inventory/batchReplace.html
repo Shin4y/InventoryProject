@@ -8,12 +8,8 @@
 {% block content %}
 <div class = 'container-fluid'>
 	<div id = "form" class = 'form-group'>
-		<!--<form action = "{% url 'inventory:batchReplace' mySlug %}" method = POST>-->
 		{% csrf_token %}
 		{% crispy form %}
-
-
-
 	</div>
 	<div>
 		<button id = 'addField'> Add Field </button>

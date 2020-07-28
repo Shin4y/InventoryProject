@@ -126,3 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRISPY_FAIL_SILENTLY = not DEBUG
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -106,6 +106,7 @@ def batchReplace(request, mySlug):
 		#something
 	else:
 		form = BatchForm()
+		form.helper.form_action = reverse('inventory:batchReplace', args = (mySlug,))
 		return render(request, 'inventory/batchReplace.html', {'form' : form, 'mySlug': mySlug})
 
 	return

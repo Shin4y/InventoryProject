@@ -1,18 +1,27 @@
 {% extends "inventory/base.html" %}
 {% load crispy_forms_tags %}
+{% crispy batchForm batchForm.helper %}
 {% load static %}
+
 {% block title %} Batch Replace {% endblock %}
 
 {% block content %}
+<div class = 'container-fluid'>
+	<div id = "form" class = 'form-group'>
+		<!--<form action = "{% url 'inventory:batchReplace' mySlug %}" method = POST>-->
+		{% csrf_token %}
+		{% crispy form %}
 
-<div id = "form">
-<form action = "{% url 'inventory:batchReplace' mySlug %}" method = POST>
-	{% csrf_token %}
-	{{form|crispy}}
 
-</form>
-<button id = 'addField'> Add Field </button>
+
+	</div>
+	<div>
+		<button id = 'addField'> Add Field </button>
+		<button id = 'swapAll'> Swap All </button>
+	</div>
 </div>
 
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src = "{% static 'inventory/scripts/batchScript.js'  %}"> </script>
 {% endblock %}

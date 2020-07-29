@@ -86,3 +86,29 @@ def getTokens(allSubObjects, tokenList):
 				tokenList.append(value)
 
 	return 
+
+def swapRoom(y, z):
+	roomHolder = y.room
+	buildingHolder = y.building
+	y.room = z.room
+	y.building = z.building
+	z.room = roomHolder
+	z.building = buildingHolder
+	y.save()
+	z.save()
+
+def zipSwapData(data):
+	list1 = list()
+	list2 = list()
+	flag = True
+	for key in data:
+		if key == 'extra_field_count':
+			continue
+		if flag == True:
+			list1.append(data[key])
+			flag = False
+		else:
+			list2.append(data[key])
+			flag = True
+
+	return zip(list1, list2)

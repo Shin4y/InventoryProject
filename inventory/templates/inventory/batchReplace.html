@@ -8,12 +8,15 @@
 {% block content %}
 <div class = 'container-fluid'>
 	<div id = "form" class = 'form-group'>
-		{% csrf_token %}
-		{% crispy form %}
-	</div>
-	<div>
-		<button id = 'addField'> Add Field </button>
-		<button id = 'swapAll'> Swap All </button>
+		<div id = "innerForm">
+			{% csrf_token %}
+			{% crispy form %}
+		</div>
+		<div>
+			<button id = 'addField'> Add Field </button>
+			<button id = 'swapAll'> Swap All </button>
+		</div>
+
 	</div>
 </div>
 

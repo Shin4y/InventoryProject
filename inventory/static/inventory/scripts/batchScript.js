@@ -30,12 +30,16 @@ $("#addField").click(function() {
     row2.innerHTML = '<div class = "col-md-3">'+el2+'</div>';
     //$("#form").append(element2);
     console.log(typeof(form_count));
-    $("#form").append(row1);
-    $("#form").append(row2);
+    $("#innerForm").append(row1);
+    $("#innerForm").append(row2);
     //$("#form").append(element3);
     // build element and append it to our forms container
 
-    $("[name=extra_field_count]").val(form_count);
+    $("input[name='extra_field_count']").val(form_count);
     // increment form count so our view knows to populate 
     // that many fields for validation
+})
+
+$("#swapAll").click(function(){
+	document.getElementById("swapForm").submit();
 })

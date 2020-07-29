@@ -92,6 +92,7 @@ class BatchForm(forms.Form): #a form used to swap name 1 and name 2 machines. na
 		extra_fields = kwargs.pop('extra', 0)
 		super(BatchForm, self).__init__(*args, **kwargs)
 		self.helper = FormHelper()
+		self.helper.form_id = 'swapForm'
 		self.helper.form_method = 'post'
 		self.helper.form_class = 'form-horizontal'
 		self.helper.label_class = 'col-md-1'

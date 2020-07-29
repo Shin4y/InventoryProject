@@ -81,28 +81,41 @@ def displayAllObjects(request, mySlug, sortBy = ''):
 	objectName = re.sub("([a-z])([A-Z])","\g<1> \g<2>", mySlug) #uncamelcases the slug for visual purposes
 	objectname = objectName.lower()
 	listOfFields = getListOfFields(mySlug)
-	if slugIsValid(mySlug):
-		allSubObjects = getAllSubObjects(mySlug)
+	
+	allSubObjects = getAllSubObjects(mySlug)
+	
+	if(sortBy != ''):
+		sorted(allSubObjects, key=attrgetter(sortBy))
 
-		if(sortBy != ''):
-			sorted(allSubObjects, key=attrgetter(sortBy))
+	bigList, tokenList = ([] for i in range(2))
+	getDisplayData(allSubObjects, bigList)
+	getTokens(allSubObjects, tokenList)
 
-		bigList, tokenList = ([] for i in range(2))
-		getDisplayData(allSubObjects, bigList)
-		getTokens(allSubObjects, tokenList)
+	masterList = zip(bigList, tokenList)
 
-		masterList = zip(bigList, tokenList)
-
-		return render(request, 'inventory/displayAll.html', {'data':masterList, 'objectName': objectName, 'listOfFields':listOfFields})
-		#data is a 2d list of object data
-		#listOfFields is a list of field strings to put at the top of the table
+	return render(request, 'inventory/displayAll.html', {'data':masterList, 'objectName': objectName, 'listOfFields':listOfFields})
+			#data is a 2d list of object data}
+	#listOfFields is a list of field strings to put at the top of the table
 
 def faviconView(request):	
 	faviconView = RedirectView.as_view(url='/static/inventory/images/favicon.ico', permanent=True)
 
 def batchReplace(request, mySlug):
+
+	if slugIsValid(mySlug) != True:
+		return HttpResponseNotFound(mySlug.capitalize() + " is not a  valid object.")
+
 	if request.method == "POST":
-		return
+		form = BatchForm(request.POST, extra = request.POST.get('extra_field_count'))
+		if form.is_valid():
+			data = zipSwapData(form.cleaned_data)
+			for item1, item2 in data:
+				y = commonObject.objects.get(name = item1)
+				z = commonObject.objects.get(name = item2)
+				swapRoom(getattr(y, mySlug), getattr(z, mySlug))
+				
+			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
+
 		#something
 	else:
 		form = BatchForm()

@@ -69,8 +69,9 @@ def editObject(request, secret_id, mySlug):
 			if dontEdit(field.name):
 				field.value = getattr(editObject, field.name)
 
+		qrcode = editObject.qrcode
 
-		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': mySlug })
+		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': mySlug, 'qrcode':qrcode})
 
 
 def displayAllObjects(request, mySlug, sortBy = ''):

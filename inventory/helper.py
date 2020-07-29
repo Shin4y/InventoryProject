@@ -1,7 +1,7 @@
 from .models import *
 from operator import itemgetter, attrgetter
-import datetime, secrets
-import re
+import datetime, secrets, re, pyqrcode	
+
 
 #LOCATION_CHOICES = [('Office', 'Office'), ('Lab', 'Lab'), ('Classroom', 'Classroom'), ('Other, Other')]
 
@@ -28,19 +28,20 @@ def formDataToObject(editObject, formData, mySlug, newObject):#Because forms are
 	if newObject == True:
 		editObject.slug = mySlug
 		editObject.token = secrets.token_urlsafe(20)
+		editObject.qrUrl = pyqrcode.create('http://http://127.0.0.1:8000/inventory/' + mySlug +'/id=' + token) #NEEDS TO BE CHANGED WHEN OUT OF PRODUCTION
 
 	return
 
 def createDynamicForm(subObject): #Creates general forms by reading all the fields of a model and creating corresponding fields
 	f = commonObjectForm()
-	z = 0
 	for key in subObject._meta.fields:
 		if dontEdit(key.name) == False:
-			if key.name != 'building': 
-				f.fields[key.name] = forms.CharField(initial = getattr(subObject, key.name), label = key.verbose_name)
-
+			if key.name != 'building' and key.name != 'qrcode': 
+				f.fields[key.name] = forms.CharField(initial = getattr(subObject, key.name.replace(" ", "")), label = key.verbose_name)
+				# I dont know why the line above needs to strip white space, but it suddenly started happening so its staying there
 	f.fields['building'].initial = getattr(subObject, 'building')			
 	return f
+
 
 def getAllSubObjects(mySlug): #Getting all instances of a certain slug and putting into a list
 	allObjects = commonObject.objects.filter(slug = mySlug)

@@ -3,6 +3,7 @@ from crispy_forms.helper import FormHelper
 from django import forms
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field
 from crispy_forms.bootstrap import StrictButton
+import pyqrcode
 
 BUILDING_CHOICES = [('WWH', 'WWH'), ('60FifthAve', '60FifthAve'), ('Other', 'Other')]
 
@@ -19,6 +20,7 @@ class commonObject(models.Model):
 	modelName = models.CharField("Model Name", max_length=50, default = "")
 	token = models.CharField(max_length=30, default = 0)
 	slug = models.SlugField(default = '')
+	qrcode = models.CharField(max_length = 100, default = 'http://google.com')
 
 class commonObjectForm(forms.ModelForm):
 	class Meta:

@@ -1,14 +1,17 @@
 {% extends 'inventory/base.html' %}
 {% load crispy_forms_tags %}
-
+{% load qr_tags %}
 {% block title %} Editing {{objectName}} {% endblock %}
 
 {% block content %}
-<div class = form-group>
+<div class = 'container-fluid'>
+<div class = 'form-group'>
 <form action = "{% url 'inventory:editObject' mySlug token %}" method="post">
     {% csrf_token %}
     {{ form|crispy }}
+    {% qr_from_text "http://google.com" "m" %}
     <input type="submit" value="Submit">
 </form>
+</div>
 </div>
 {% endblock %}

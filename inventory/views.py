@@ -83,10 +83,10 @@ def displayAllObjects(request, mySlug, sortBy = ''):
 	listOfFields = getListOfFields(mySlug)
 	
 	allSubObjects = getAllSubObjects(mySlug)
-	
+	#red = allSubObjects
+	e = sortBy
 	if(sortBy != ''):
-		sorted(allSubObjects, key=attrgetter(sortBy))
-
+		allSubObjects.sort(key=lambda x: getattr(x, sortBy), reverse = True)
 	bigList, tokenList = ([] for i in range(2))
 	getDisplayData(allSubObjects, bigList)
 	getTokens(allSubObjects, tokenList)

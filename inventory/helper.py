@@ -50,10 +50,10 @@ def getAllSubObjects(mySlug): #Getting all instances of a certain slug and putti
 
 	return allSubObjects
 
-def sortObjects(allSubObjects, sortBy):
-	sorted(allSubObjects, key = attrgetter(sortBy))
-
-	return
+#def sortObjects(allSubObjects, sortBy):
+#	sorted(allSubObjects, key = attrgetter(sortBy))
+#
+#	return
 
 def getListOfFields(mySlug): #getting field names for the table in displayAll.html
 	constructor = globals()[mySlug.capitalize()]

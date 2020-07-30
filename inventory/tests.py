@@ -2,10 +2,10 @@ from django.test import TestCase, Client
 from inventory.models import *
 from django.urls import reverse
 
-testData = {'name':'test', 'locationType':'WWH', 'location':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
+testData = {'name':'test', 'building':'WWH', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
  'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
 
-testDataUpdate = {'name':'updated', 'locationType':'WWH', 'location':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
+testDataUpdate = {'name':'updated', 'building':'WWH', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
  'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
 
 class ObjectTestCase(TestCase):
@@ -34,7 +34,6 @@ class ObjectTestCase(TestCase):
 		self.assertEqual(notebook.__class__.__name__, "Notebooks")
 
 	def testCreateForm(self):
-		 
 		c = Client()
 		response = c.post(reverse('inventory:createObject', args = ['desktops']), testData)
 		self.assertEqual(response.__class__.__name__, 'HttpResponseRedirect')
@@ -47,13 +46,21 @@ class ObjectTestCase(TestCase):
 		response = c.post(reverse('inventory:editObject', args = ['desktops', desktop.token]), testDataUpdate)
 		self.assertEqual(Desktops.objects.get(OS = 'test').name, 'updated')
 
-	def displayAllObjects(self):
+	def testDisplayAllObjects(self):
 		c = Client()
 		response = c.post(reverse('inventory:createObject', args = ['desktops']), testData)
 		response2 = c.post(reverse('inventory:createObject', args = ['desktops']), testDataUpdate)
 		response3 = c.get(reverse('inventory:displayAllObjects', args = ['desktops']))
 
-		self.assertEqual(response3.__class__, 'django.http.response.HttpResponse')
+		self.assertEqual(response3.__class__.__name__, "HttpResponse")
 
+	def testBatchReplace(self):
+		return
+
+	def testFaviconIcon(self):
+		return
+
+	def testToStorage(self):
+		return
 
 # Create your tests here.

@@ -13,7 +13,7 @@ class commonObject(models.Model):
 	#	choices = LOCATION_CHOICES)
 	building = models.CharField("Building", max_length=50, default ='WWH', choices = BUILDING_CHOICES)
 	name = models.CharField("Name", max_length=50, default = "")
-	room = models.CharField("Location", max_length=50, default = "")
+	room = models.CharField("Room", max_length=50, default = "")
 	dateLastModified = models.DateTimeField("Date Last Modified", max_length=50, default = '2000-1-1')
 	lastUpdatedUser = models.CharField("Last Updated User", max_length=50, default = "")
 	Notes = models.CharField(max_length=100)

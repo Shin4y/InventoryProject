@@ -6,8 +6,8 @@ import datetime, secrets, re, pyqrcode
 #LOCATION_CHOICES = [('Office', 'Office'), ('Lab', 'Lab'), ('Classroom', 'Classroom'), ('Other, Other')]
 
 def dontEdit(key):
-	if key != 'commonobject_ptr_id' and key != 'commonobject_ptr' and key != 'slug' and key != 'token' and key != 'lastUpdatedUser' and key != 'dateLastModified' and key != 'id':
-		return False
+	if key != 'commonobject_ptr_id' and key != 'commonobject_ptr' and key != 'slug' and key != 'token' and key != 'lastUpdatedUser' and key != 'dateLastModified' and key != 'id' and key != 'qrcode':
+		return False 
 
 	return True
 
@@ -28,7 +28,7 @@ def formDataToObject(editObject, formData, mySlug, newObject):#Because forms are
 	if newObject == True:
 		editObject.slug = mySlug
 		editObject.token = secrets.token_urlsafe(20)
-		editObject.qrUrl = pyqrcode.create('http://http://127.0.0.1:8000/inventory/' + mySlug +'/id=' + token) #NEEDS TO BE CHANGED WHEN OUT OF PRODUCTION
+		editObject.qrcode = 'http://http://127.0.0.1:8000/inventory/' + mySlug +'/id=' + editObject.token #NEEDS TO BE CHANGED WHEN OUT OF PRODUCTION
 
 	return
 

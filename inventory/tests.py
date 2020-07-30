@@ -8,6 +8,20 @@ testData = {'name':'test', 'building':'WWH', 'room':'test', 'Notes':'test', 'mod
 testDataUpdate = {'name':'updated', 'building':'WWH', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
  'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
 
+testData2 = {'name':'desktop1', 'building':'WWH', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
+ 'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
+
+testData3 = {'name':'desktop2', 'building':'60FifthAve', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
+ 'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
+
+testData4 = {'name':'desktop3', 'building':'WWH', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
+ 'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
+
+testData5 = {'name':'desktop4', 'building':'60FifthAve', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
+ 'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
+
+batchTestData = {'name1':'desktop1', 'name2':'desktop2', 'extra_field_count': '2', 'extra_field_1':'desktop3', 'extra_field_2':'desktop4'}
+
 class ObjectTestCase(TestCase):
 	def setUp(self):
 		desktop = Desktops.objects.create(name = "test", modelName = "model1", slug = "desktops")
@@ -55,7 +69,27 @@ class ObjectTestCase(TestCase):
 		self.assertEqual(response3.__class__.__name__, "HttpResponse")
 
 	def testBatchReplace(self):
+		c = Client()
+		c.post(reverse('inventory:createObject', args = ['desktops']), testData2)
+		c.post(reverse('inventory:createObject', args = ['desktops']), testData3)
+		c.post(reverse('inventory:createObject', args = ['desktops']), testData4)
+		c.post(reverse('inventory:createObject', args = ['desktops']), testData5)
+
+		c.post(reverse('inventory:batchReplace', args = ['desktops']), testBatchData)
+		desktop1 = Desktops.objects.get(name = 'desktop1')
+		desktop2 = Desktops.objects.get(name = 'desktop2')
+		desktop3 = Desktops.objects.get(name = 'desktop3')
+		desktop4 = Desktops.objects.get(name = 'desktop4')
+		self.assertEqual(desktop1.building, '60FifthAve')
+		self.assertEqual(desktop2.building, 'WWH')
+		self.assertEqual(desktop3.building, '60FifthAve')
+		self.assertEqual(desktop4.building, 'WWH')
 		return
+
+	#def testBatchForm(self):
+	#	form = BatchForm(batchTestData, batchTestData['extra_field_count'])
+	#	self.assertFalse(form.is_valid())
+	#	self.assertEqual(form.errors['name1'][0], 'It is invalid')
 
 	def testFaviconIcon(self):
 		return

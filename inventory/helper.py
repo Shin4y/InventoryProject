@@ -97,6 +97,8 @@ def swapRoom(y, z):
 	z.building = buildingHolder
 	y.save()
 	z.save()
+	
+	return
 
 def zipSwapData(data):
 	list1 = list()

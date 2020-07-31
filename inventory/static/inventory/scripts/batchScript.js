@@ -3,7 +3,6 @@
 form_count = 0;
 
 $("#addField").click(function() {
-    form_count++;
     var row1 = document.createElement("div");
     row1.classList.add('form-group')
     row1.classList.add('row')
@@ -34,7 +33,7 @@ $("#addField").click(function() {
     $("#innerForm").append(row2);
     //$("#form").append(element3);
     // build element and append it to our forms container
-
+    form_count++;
     $("input[name='extra_field_count']").val(form_count);
     // increment form count so our view knows to populate 
     // that many fields for validation

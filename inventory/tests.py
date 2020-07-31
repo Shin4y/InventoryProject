@@ -20,7 +20,7 @@ testData4 = {'name':'desktop3', 'building':'WWH', 'room':'test', 'Notes':'test',
 testData5 = {'name':'desktop4', 'building':'60FifthAve', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
  'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
 
-batchTestData = {'name1':'desktop1', 'name2':'desktop2', 'extra_field_count': '2', 'extra_field_1':'desktop3', 'extra_field_2':'desktop4'}
+batchTestData = {'name1':'desktop1', 'name2':'desktop2', 'extra_field_count': '2', 'extra_field_0':'desktop3', 'extra_field_1':'desktop4'}
 
 class ObjectTestCase(TestCase):
 	def setUp(self):

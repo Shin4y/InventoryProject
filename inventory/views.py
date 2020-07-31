@@ -105,6 +105,7 @@ def batchReplace(request, mySlug):
 		return HttpResponseNotFound(mySlug.capitalize() + " is not a  valid object.")
 
 	if request.method == "POST":
+		e = request.POST
 		form = BatchForm(request.POST, extra = request.POST.get('extra_field_count'))
 		if form.is_valid():
 			data = zipSwapData(form.cleaned_data)
@@ -114,7 +115,7 @@ def batchReplace(request, mySlug):
 				swapRoom(getattr(y, mySlug), getattr(z, mySlug))
 				
 			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
-		
+		#return HttpResponse(form.errors.as_data())
 		#something
 	else:
 		form = BatchForm()

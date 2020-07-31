@@ -7,15 +7,21 @@
 
 {% block content %}
 <div class = 'container-fluid'>
-	<form>
+	<form action = "{% url 'inventory:batchReplace' mySlug %}" method = "post" id = "swapForm">
 		<div id = "form" class = 'form-group'>
 			<div id = "innerForm">
 				{% csrf_token %}
+				<!-- {{form|crispy}} -->
+				<input type = "hidden" name ="extra_field_count" value = "0">
 				<div class = 'form-group row'>
-					{{form.name1}}
+					<div class = 'col-md-3'>
+						{{form.name1}}
+					</div>
 				</div>
 				<div class = 'form-group row'>
-					{{form.name2}}
+					<div class = 'col-md-3'>
+						{{form.name2}}
+					</div>
 				</div>
 			</div>
 			<div>

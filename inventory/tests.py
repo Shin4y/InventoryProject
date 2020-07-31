@@ -75,7 +75,7 @@ class ObjectTestCase(TestCase):
 		c.post(reverse('inventory:createObject', args = ['desktops']), testData4)
 		c.post(reverse('inventory:createObject', args = ['desktops']), testData5)
 
-		c.post(reverse('inventory:batchReplace', args = ['desktops']), testBatchData)
+		c.post(reverse('inventory:batchReplace', args = ['desktops']), batchTestData)
 		desktop1 = Desktops.objects.get(name = 'desktop1')
 		desktop2 = Desktops.objects.get(name = 'desktop2')
 		desktop3 = Desktops.objects.get(name = 'desktop3')

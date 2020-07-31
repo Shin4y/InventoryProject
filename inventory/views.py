@@ -114,7 +114,7 @@ def batchReplace(request, mySlug):
 				swapRoom(getattr(y, mySlug), getattr(z, mySlug))
 				
 			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
-
+		
 		#something
 	else:
 		form = BatchForm()

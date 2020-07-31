@@ -7,16 +7,23 @@
 
 {% block content %}
 <div class = 'container-fluid'>
-	<div id = "form" class = 'form-group'>
-		<div id = "innerForm">
-			{% csrf_token %}
-			{% crispy form %}
+	<form>
+		<div id = "form" class = 'form-group'>
+			<div id = "innerForm">
+				{% csrf_token %}
+				<div class = 'form-group row'>
+					{{form.name1}}
+				</div>
+				<div class = 'form-group row'>
+					{{form.name2}}
+				</div>
+			</div>
+			<div>
+				<button id = 'addField'> Add Field </button>
+				<button id = 'swapAll'> Swap All </button>
+			</div>
 		</div>
-		<div>
-			<button id = 'addField'> Add Field </button>
-			<button id = 'swapAll'> Swap All </button>
-		</div>
-	</div>
+	</form>
 </div>
 
 

@@ -1,6 +1,6 @@
 from .models import *
 from operator import itemgetter, attrgetter
-import datetime, secrets, re, pyqrcode	
+import datetime, secrets, re, pyqrcode, copy
 
 
 #LOCATION_CHOICES = [('Office', 'Office'), ('Lab', 'Lab'), ('Classroom', 'Classroom'), ('Other, Other')]
@@ -97,21 +97,45 @@ def swapRoom(y, z):
 	z.building = buildingHolder
 	y.save()
 	z.save()
-	
+
 	return
 
-def zipSwapData(data):
+def zipSwapData(data, mySlug): #also assigns new users 
+	zippedData = zipFields(data)
+	zippedDataCopy = copy.deepcopy(zippedData)
+	giveNewOwner(zippedDataCopy, mySlug)
 	list1 = list()
 	list2 = list()
 	flag = True
+	for name, owner in zippedData:
+		if flag == True:
+			list1.append(name)
+			flag = False
+		else:
+			list2.append(name)
+			flag = True
+	return zip(list1, list2)
+
+def giveNewOwner(zippedData, mySlug):
+	counter = 0 #resets every two loops
+	name = ''
+	owner = ''
+	for name, owner in zippedData:
+		obj = commonObject.objects.get(name = name)
+		getattr(obj, mySlug).user = owner
+		getattr(obj, mySlug).save()
+
+def zipFields(data):#zipping the room field and the owner field together
+	flag = False #alternates to put owner and room number in different lists to zip together
+	list1 = list()
+	list2 = list()
 	for key in data:
 		if key == 'extra_field_count':
 			continue
-		if flag == True:
+		if 'extra_field_' in key or 'name' in key:
 			list1.append(data[key])
-			flag = False
-		else:
+		elif 'extra_owner_' in key or 'owner' in key:
 			list2.append(data[key])
-			flag = True
 
 	return zip(list1, list2)
+

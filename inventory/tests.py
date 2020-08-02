@@ -20,7 +20,7 @@ testData4 = {'name':'desktop3', 'building':'WWH', 'room':'test', 'Notes':'test',
 testData5 = {'name':'desktop4', 'building':'60FifthAve', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
  'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
 
-batchTestData = {'name1':'desktop1', 'name2':'desktop2', 'extra_field_count': '2', 'extra_field_0':'desktop3', 'extra_field_1':'desktop4'}
+batchTestData = {'name1':'desktop1', 'name2':'desktop2', 'extra_field_count': '2', 'extra_field_0':'desktop3', 'extra_field_1':'desktop4', 'owner1':'thomas1', 'owner2':'thomas2', 'extra_owner_0':'thomas3', 'extra_owner_1':'thomas4'}
 
 class ObjectTestCase(TestCase):
 	def setUp(self):
@@ -84,6 +84,11 @@ class ObjectTestCase(TestCase):
 		self.assertEqual(desktop2.building, 'WWH')
 		self.assertEqual(desktop3.building, '60FifthAve')
 		self.assertEqual(desktop4.building, 'WWH')
+
+		self.assertEqual(desktop1.user, 'thomas1')
+		self.assertEqual(desktop2.user, 'thomas2')
+		self.assertEqual(desktop3.user, 'thomas3')
+		self.assertEqual(desktop4.user, 'thomas4')
 		return
 
 	#def testBatchForm(self):

@@ -86,8 +86,11 @@ class DataCenterEquipment(commonObject): #might get rid of later, theres only on
 ##########################################################################################
 
 class BatchForm(forms.Form): #a form used to swap name 1 and name 2 machines. names refer to the name field of said machines
-	name1 = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Name1'}))
-	name2 = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Name2'}))
+	name1 = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Name 1'}))
+	name2 = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Name 2'}))
+	owner1 = forms.CharField(max_length=50, widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder':'New Owner 1'}))
+	owner2 = forms.CharField(max_length=50, widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder':'New Owner 2'}))
+
 	extra_field_count = forms.CharField(widget=forms.HiddenInput())
 
 	def __init__(self, *args, **kwargs):
@@ -112,6 +115,7 @@ class BatchForm(forms.Form): #a form used to swap name 1 and name 2 machines. na
 			# generate extra fields in the number specified via extra_fields
 			self.fields['extra_field_{index}'.format(index=index)] = \
 				forms.CharField()
+			self.fields['extra_owner_{index}'.format(index=index)] = forms.CharField()
 
 
 	

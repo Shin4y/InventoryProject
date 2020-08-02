@@ -108,14 +108,15 @@ def batchReplace(request, mySlug):
 		e = request.POST
 		form = BatchForm(request.POST, extra = request.POST.get('extra_field_count'))
 		if form.is_valid():
-			data = zipSwapData(form.cleaned_data)
+			data = zipSwapData(form.cleaned_data, mySlug)
 			for item1, item2 in data:
 				y = commonObject.objects.get(name = item1)
 				z = commonObject.objects.get(name = item2)
+				#giveNewOwner(getattr(y, mySlug), getattr(z, mySlug))
 				swapRoom(getattr(y, mySlug), getattr(z, mySlug))
 				
 			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
-		#return HttpResponse(form.errors.as_data())
+		return HttpResponse(form.errors)
 		#something
 	else:
 		form = BatchForm()

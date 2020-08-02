@@ -12,8 +12,10 @@ $("#addField").click(function() {
     row2.classList.add('row')
 
     var el1 = '<input type = "text" name = "extra_field_' + String(form_count) +  '" class = "form-control" placeholder = "Name 1">'
+    var el3 = '<input type = "text" name = "extra_owner_' + String(form_count) +  '" class = "form-control" placeholder = "Owner 1">'
     form_count++;
     var el2 = '<input type = "text" name = "extra_field_' + String(form_count) +  '" class = "form-control" placeholder = "Name 2">'
+    var el4 = '<input type = "text" name = "extra_owner_' + String(form_count) +  '" class = "form-control" placeholder = "Owner 2">'
     /*let element = $('<input type="text"/>');
     element.attr('name', 'extra_field_' + form_count);
     element.attr('class', 'form-control');
@@ -25,8 +27,10 @@ $("#addField").click(function() {
     element2.attr('class', 'form-control');
     element2.attr('placeholder', 'Name 2');*/
 
-    row1.innerHTML = '<div class = "col-md-3">'+el1+'</div>';
-    row2.innerHTML = '<div class = "col-md-3">'+el2+'</div>';
+    
+   
+    row1.innerHTML = '<div class = "col-md-3">'+el1+'</div>' + '<div class = "col-md-3">'+el3+'</div>';
+    row2.innerHTML = '<div class = "col-md-3">'+el2+'</div>' + '<div class = "col-md-3">'+el4+'</div>'
     //$("#form").append(element2);
     console.log(typeof(form_count));
     $("#innerForm").append(row1);

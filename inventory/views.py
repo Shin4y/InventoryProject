@@ -109,15 +109,13 @@ def batchReplace(request, mySlug):
 		form = BatchForm(request.POST, extra = request.POST.get('extra_field_count'))
 		if form.is_valid():
 			data = zipSwapData(form.cleaned_data, mySlug)
-			for item1, item2 in data:
+			for item1, item2 in data: #actually swaps the rooms.
 				y = commonObject.objects.get(name = item1)
 				z = commonObject.objects.get(name = item2)
-				#giveNewOwner(getattr(y, mySlug), getattr(z, mySlug))
 				swapRoom(getattr(y, mySlug), getattr(z, mySlug))
 				
 			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
 		return HttpResponse(form.errors)
-		#something
 	else:
 		form = BatchForm()
 		form.helper.form_action = reverse('inventory:batchReplace', args = (mySlug,))
@@ -132,5 +130,6 @@ def toStorage(request, mySlug, name, room, building):
 	obj = commonObject.objects.get(name = name)
 	obj.room = room
 	obj.building = building
+	obj.user = ""
 	obj.save()
 	return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))

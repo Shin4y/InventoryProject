@@ -67,7 +67,7 @@ def getListOfFields(mySlug): #getting field names for the table in displayAll.ht
 
 	return listOfFields
 
-def getDisplayData(allSubObjects, bigList):
+def getDisplayData(allSubObjects, bigList): #gets data from objects to be displayed in displayAll view/template
 	for obj in allSubObjects:
 			smallList = list()
 			first = True
@@ -80,7 +80,7 @@ def getDisplayData(allSubObjects, bigList):
 
 	return 
 
-def getTokens(allSubObjects, tokenList):
+def getTokens(allSubObjects, tokenList): #gets tokens to be used for edit button links for displayAll view/template
 	for obj in allSubObjects:
 		for attr, value in obj.__dict__.items():
 			if attr == 'token':
@@ -88,7 +88,7 @@ def getTokens(allSubObjects, tokenList):
 
 	return 
 
-def swapRoom(y, z):
+def swapRoom(y, z): #swaproom function for batchReplace
 	roomHolder = y.room
 	buildingHolder = y.building
 	y.room = z.room
@@ -100,7 +100,7 @@ def swapRoom(y, z):
 
 	return
 
-def zipSwapData(data, mySlug): #also assigns new users 
+def zipSwapData(data, mySlug): #zips the name and user fields together for later convenience. also assigns new users 
 	zippedData = zipFields(data)
 	zippedDataCopy = copy.deepcopy(zippedData)
 	giveNewOwner(zippedDataCopy, mySlug)
@@ -116,7 +116,7 @@ def zipSwapData(data, mySlug): #also assigns new users
 			flag = True
 	return zip(list1, list2)
 
-def giveNewOwner(zippedData, mySlug):
+def giveNewOwner(zippedData, mySlug): #gives the objects named in batch replace new owners based on the zipped data
 	counter = 0 #resets every two loops
 	name = ''
 	owner = ''

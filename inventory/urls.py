@@ -12,4 +12,5 @@ urlpatterns = [
 	path('<slug:mySlug>/', views.displayAllObjects, name = 'displayAllObjects'),
 	path('<slug:mySlug>/sort=<str:sortBy>/', views.displayAllObjects, name = 'displayAllObjects'),
 	path('<slug:mySlug>/batch/', views.batchReplace, name = 'batchReplace'),
+	path('<slug:mySlug>/toStorage/<str:name>/<str:room>/<str:building>', views.toStorage, name = 'toStorage'),
 	]

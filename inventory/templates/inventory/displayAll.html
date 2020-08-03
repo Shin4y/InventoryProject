@@ -21,7 +21,20 @@
 			{% for value in obj.0 %} 
 				<td> {{value}} </td>
 			{% endfor %}
-			<td class = "col-1"><a href = 'id={{ obj.1 }}'><button type="button" class="btn btn-secondary">Edit</button></a></td>
+			<td class = "col-1">
+				<a href = "{% url 'inventory:batchReplace' mySlug %}"><button type="button" class="btn btn-primary">Edit</button></a>
+				<div class="btn-group">
+				  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    To Storage
+				  </button>
+				  <div class="dropdown-menu">
+				    <a class="dropdown-item" href="{% url 'inventory:toStorage' mySlug=mySlug name=obj.0.1 room='1018' building='WWH' %}">WWH1018</a>
+				    <a class="dropdown-item" href="{% url 'inventory:toStorage' mySlug=mySlug name=obj.0.1 room='411' building='WWH' %}">WWH41?</a>
+				    <a class="dropdown-item" href="{% url 'inventory:toStorage' mySlug=mySlug name=obj.0.1 room='710' building='60FifthAve' %}">60FA7thFloor</a>
+				    <a class="dropdown-item" href="{% url 'inventory:toStorage' mySlug=mySlug name=obj.0.1 room='310' building='60FifthAve' %}">60FA3rdFloor</a>
+				  </div>
+				</div>
+			</td>
 		{% endfor %}
 		</tr>
 	</tbody>

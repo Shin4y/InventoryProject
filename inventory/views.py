@@ -92,7 +92,7 @@ def displayAllObjects(request, mySlug, sortBy = ''):
 
 	masterList = zip(bigList, tokenList)
 
-	return render(request, 'inventory/displayAll.html', {'data':masterList, 'objectName': objectName, 'listOfFields':listOfFields})
+	return render(request, 'inventory/displayAll.html', {'data':masterList, 'objectName': objectName, 'listOfFields':listOfFields, 'mySlug':mySlug})
 			#data is a 2d list of object data}
 	#listOfFields is a list of field strings to put at the top of the table
 
@@ -102,7 +102,7 @@ def faviconView(request):
 def batchReplace(request, mySlug):
 
 	if slugIsValid(mySlug) != True:
-		return HttpResponseNotFound(mySlug.capitalize() + " is not a  valid object.")
+		return HttpResponseNotFound(mySlug.capitalize() + " is not a valid object.")
 
 	if request.method == "POST":
 		e = request.POST
@@ -125,5 +125,12 @@ def batchReplace(request, mySlug):
 
 	return
 
-def toStorage(request, mySlug, name):
-	return
+def toStorage(request, mySlug, name, room, building):
+	if slugIsValid(mySlug) != True:
+		return HttpResponseNotFound(mySlug.capitalize() + " is not a valid object.")
+
+	obj = commonObject.objects.get(name = name)
+	obj.room = room
+	obj.building = building
+	obj.save()
+	return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))

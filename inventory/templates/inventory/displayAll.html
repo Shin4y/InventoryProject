@@ -22,7 +22,7 @@
 				<td> {{value}} </td>
 			{% endfor %}
 			<td class = "col-1">
-				<a href = "{% url 'inventory:batchReplace' mySlug %}"><button type="button" class="btn btn-primary">Edit</button></a>
+				<a href = "{% url 'inventory:editObject' obj.1 %}"><button type="button" class="btn btn-primary">Edit</button></a>
 				<div class="btn-group">
 				  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    To Storage

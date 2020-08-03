@@ -6,7 +6,7 @@
 {% block content %}
 <div class = 'container-fluid'>
 <div class = 'form-group'>
-<form action = "{% url 'inventory:editObject' mySlug token %}" method="post">
+<form action = "{% url 'inventory:editObject' token %}" method="post">
     {% csrf_token %}
     {{ form|crispy }}
     {% qr_from_text qrcode "m" %}

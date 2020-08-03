@@ -123,13 +123,17 @@ def batchReplace(request, mySlug):
 
 	return
 
-def toStorage(request, mySlug, name, room, building):
+def toStorage(request, mySlug, name, room, building): #moves object to storage.
 	if slugIsValid(mySlug) != True:
 		return HttpResponseNotFound(mySlug.capitalize() + " is not a valid object.")
 
 	obj = commonObject.objects.get(name = name)
 	obj.room = room
 	obj.building = building
-	obj.user = ""
+
+	try:#incase the model doesn't have a user attribute
+		obj.user = ""
+	except AttributeError:
+		pass
 	obj.save()
 	return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))

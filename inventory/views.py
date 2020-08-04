@@ -74,7 +74,7 @@ def editObject(request, secret_id):
 		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': mySlug, 'qrcode':qrcode})
 
 
-def displayAllObjects(request, mySlug, sortBy = ''):
+def displayAllObjects(request, mySlug, sortBy = 'building'):
 	
 	if slugIsValid(mySlug) != True:
 		return HttpResponseNotFound(mySlug.capitalize() + " is not a valid object.")

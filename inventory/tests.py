@@ -57,7 +57,7 @@ class ObjectTestCase(TestCase):
 		c = Client()
 		response = c.post(reverse('inventory:createObject', args = ['desktops']), testData)
 		desktop = Desktops.objects.get(OS = 'test')
-		response = c.post(reverse('inventory:editObject', args = ['desktops', desktop.token]), testDataUpdate)
+		response = c.post(reverse('inventory:editObject', args = [desktop.token]), testDataUpdate)
 		self.assertEqual(Desktops.objects.get(OS = 'test').name, 'updated')
 
 	def testDisplayAllObjects(self):

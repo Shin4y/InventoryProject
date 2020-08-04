@@ -7,10 +7,12 @@
 <div class = 'container-fluid'>
 <div class = 'form-group'>
 <form action = "{% url 'inventory:editObject' token %}" method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    {% qr_from_text qrcode "m" %}
-    <input type="submit" value="Submit">
+	<div class = 'col-md-3'>
+	    {% csrf_token %}
+	    {{ form|crispy }}
+	    {% qr_from_text qrcode "m" %}
+	    <input type="submit" value="Submit">
+	</div>
 </form>
 </div>
 </div>

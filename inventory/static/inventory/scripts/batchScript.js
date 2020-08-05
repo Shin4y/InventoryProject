@@ -12,10 +12,10 @@ $("#addField").click(function() {
     row2.classList.add('row')
 
     var el1 = '<input type = "text" name = "extra_field_' + String(form_count) +  '" class = "form-control" placeholder = "Name 1">'
-    var el3 = '<input type = "text" name = "extra_owner_' + String(form_count) +  '" class = "form-control" placeholder = "Owner 1">'
+    var el3 = '<input type = "text" name = "extra_owner_' + String(form_count) +  '" class = "form-control" placeholder = "Owner 1" value = "">'
     form_count++;
     var el2 = '<input type = "text" name = "extra_field_' + String(form_count) +  '" class = "form-control" placeholder = "Name 2">'
-    var el4 = '<input type = "text" name = "extra_owner_' + String(form_count) +  '" class = "form-control" placeholder = "Owner 2">'
+    var el4 = '<input type = "text" name = "extra_owner_' + String(form_count) +  '" class = "form-control" placeholder = "Owner 2" value = "">'
     /*let element = $('<input type="text"/>');
     element.attr('name', 'extra_field_' + form_count);
     element.attr('class', 'form-control');

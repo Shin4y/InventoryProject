@@ -8,45 +8,60 @@ idDict = {'1':'DesktopScanners', '2':'Desktops', '3':'MacDisplayAdapter', '4':'D
 '7':'StationaryProjectors','8':'Notebooks','9':'Notebooks','10':'Desktops','11':'Peripherals','12':'Peripherals',
 '13':'Peripherals', '14':'Peripherals','15':'', '16':''}
 
-fieldDict = {'Given To':'user', 'Model':'model', 'Machine Name':'name', 'Dell Tag':'serialNumber', 'Serial Num':'serialNumber',
+fieldDict = {'Given To':'user', 'Model':'modelName', 'Machine Name':'name', 'Dell Tag':'serialNumber', 'Serial Num':'serialNumber',
 'Hardware (MAC) Address':'macAddress', 'Operating System':'OS', 'Comments':'Notes', 'OS Running':'OS','IP Address':'IpAddress',
-'HardwareAddress':'macAddress'}
+'HardwareAddress':'macAddress', 'Serial Number':'serialNumber', 'User':'user', 'Hardware Address':'macAddress', 'Bulb':'bulb', 'Name':'name',
+'Model #':'serialNumber', 'Caretaker':'user'}
 class Command(BaseCommand):
-    help = 'migrating old database to new database'
+	help = 'migrating old database to new database'
 
-    def add_arguments(self, parser):
-       pass
+	def add_arguments(self, parser):
+	   pass
 
-   def create_connection():
-       """ create a database connection to a database that resides
-           in the memory
-       """
-       conn = None;
-       try:
-           conn = sqlite3.connect('sqlite/db/temp.db')
-           return conn
-       except Error as e:
-           print(e)
-       finally:
-           if conn:
-               conn.close()
+	def create_connection():
+	   conn = None;
+	   try:
+		   conn = sqlite3.connect('sqlite/db/temp.db')
+		   return conn
+	   except Error as e:
+		   print(e)
+	   finally:
+		   if conn:
+			   conn.close()
 
-    def handle(self, *args, **options):	
+	def handle(self, *args, **options):	
 
-    	conn = create_connection()
-    	cur = conn.cursor()
-		with open('inventoryItems.csv', newline = '') as file:
-			reader = csv.DictReader(csvfile)
+		conn = sqlite3.connect('inventory/management/commands/sqlite/db/temp.db')
+		cur = conn.cursor()
+		with open('inventory/management/commands/inventoryItems.csv', newline = '') as file:
+			reader = csv.DictReader(file)
 			for row in reader:
-				constructor = globals()[idDict[row['inventory_category_id']]]
+				try:
+					constructor = globals()[idDict[row['inventory_category_id']]]
+				except KeyError:
+					continue
+
 				obj = constructor()
 				obj.room = row['room']
 				obj.building = row['building']
 				obj.lastUpdatedUser = row['updated_by']
 				obj.dateLastModified = row['updated_at']
-				cur.execute("SELECT * FROM inventoryData WHERE inventory_item_id = '4'")
+				obj.slug = idDict[row['inventory_category_id']].lower()
+
+				cur.execute("SELECT * FROM inventoryData WHERE inventory_item_id =" + row['id'])
 				rows = cur.fetchall()
 
 				for subRow in rows:
-					setattr(obj, fieldDict[row[field]], row[value])
+					if subRow[2] == 'sa6420160r':
+						continue
+					setattr(obj, fieldDict[subRow[2]], subRow[3])
 				obj.save()
+
+
+#delete from inventory_desktops;
+#delete from inventory_datacenterequipment;
+#delete from inventory_desktopscanners;
+#delete from inventory_notebooks;
+#delete from inventory_peripherals;
+#delete from inventory_printers;
+#delete from inventory_stationaryprojectors;

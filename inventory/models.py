@@ -16,10 +16,10 @@ class commonObject(models.Model):
 	room = models.CharField("Room", max_length=50, default = "")
 	dateLastModified = models.DateTimeField("Date Last Modified", max_length=50, default = '2000-1-1')
 	lastUpdatedUser = models.CharField("Last Updated User", max_length=50, default = "")
-	Notes = models.CharField(max_length=100)
+	Notes = models.CharField(max_length=500)
 	modelName = models.CharField("Model Name", max_length=50, default = "")
 	token = models.CharField(max_length=30, default = 0)
-	slug = models.SlugField(default = '')
+	slug = models.SlugField(default = '', max_length = 256)
 	qrcode = models.CharField(max_length = 100, default = 'http://google.com')
 
 class commonObjectForm(forms.ModelForm):

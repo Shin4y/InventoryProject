@@ -55,6 +55,9 @@ class Command(BaseCommand):
 					if subRow[2] == 'sa6420160r':
 						continue
 					setattr(obj, fieldDict[subRow[2]], subRow[3])
+
+				#if obj.name == '' or obj.name == 'N/A':
+				#	continue
 				obj.save()
 
 

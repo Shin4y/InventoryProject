@@ -127,7 +127,10 @@ def toStorage(request, mySlug, name, room, building): #moves object to storage.
 	if slugIsValid(mySlug) != True:
 		return HttpResponseNotFound(mySlug.capitalize() + " is not a valid object.")
 
-	obj = commonObject.objects.get(name = name)
+	if name == "":
+		return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
+
+	obj = commonObject.objects.get(token = name)
 	obj.room = room
 	obj.building = building
 

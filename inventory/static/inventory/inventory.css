@@ -5,3 +5,7 @@
 .inventory-table{
 	padding: 1vw;
 }
+
+.asteriskField {
+    display: none;
+}

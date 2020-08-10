@@ -38,8 +38,18 @@ class Desktops(commonObject):
 	OS = models.CharField("OS Type", max_length=50, default = "")
 	userType = models.CharField("User Type", max_length=50, default = "")
 
-
-
+class Macs(commonObject):
+	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
+	partNumber = models.CharField("Part Number", max_length=50, default = "")
+	modelNumber = models.CharField("Model Number", max_length=50, default = "")
+	size = models.CharField("Size", max_length=50, default = "")
+	manufactureYear = models.CharField("Manufactured Year", max_length=50, default = "")
+	appleCareNumber = models.CharField("AppleCare Registration Number", max_length=50, default = "")
+	designation = models.CharField("Designation", max_length=50, default = "")
+	user = models.CharField("Given To", max_length=50, default = "")
+	userType = models.CharField("User Type", max_length=50, default = "")
+	purchaseDate = models.CharField("Purchase Date", max_length=50, default = "")
+	purpose = models.CharField("Purpose", max_length=50, default = "")
 
 class Notebooks(commonObject):
 	user = models.CharField("User", max_length=50, default = "")

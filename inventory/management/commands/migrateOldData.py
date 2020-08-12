@@ -56,7 +56,7 @@ class Command(BaseCommand):
 					obj = constructor()
 					obj.slug = (idDict[name]).lower()
 				obj.token = row[0]
-				obj.qrcode = 'http://http://127.0.0.1:8000/inventory/equipment/' + 'id=' + obj.token+'/edit' 
+				obj.qrcode = 'https://cims.nyu.edu/webapps/inventory/equipment/' +obj.token+'/edit' 
 
 			else:
 				first = True

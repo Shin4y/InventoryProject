@@ -20,6 +20,7 @@ class commonObject(models.Model):
 	modelName = models.CharField("Model Name", max_length=255, default = "")
 	token = models.CharField(max_length=100, default = 0)
 	slug = models.SlugField(default = '', max_length = 256)
+	dateLastModified = models.CharField("Date Last Modified", max_length=50, default = '2000-1-1')
 	qrcode = models.CharField(max_length = 100, default = 'http://google.com')
 
 class commonObjectForm(forms.ModelForm):

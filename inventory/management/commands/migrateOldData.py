@@ -14,7 +14,7 @@ fieldDict = {'Given To':'user', 'Model':'modelName', 'Machine Name':'name', 'Del
 'Model #':'serialNumber', 'Caretaker':'user', 'OS':'OS', 'User Type':'userType', 'Notes':'Notes', 'Printer Name':'name', 'Part Number':'partNumber',
 'Model Number':'modelNumber', 'Model Name':'modelName', 'Manufacture Year':'manufactureYear', 'Size':'size', 'AppleCare Registration Number':'appleCareNumber',
 'Designation':'name', 'Given Date':'givenDate', 'AppleCare Expiration Date':'appleCareExpirationDate', 'Purchase Date':'purchaseDate', 'Purpose':'purpose', 'Printer Type':'modelName',
-'Description':'Notes', 'Loaned To':'user', 'Loaned Date':'givenDate', 'Serial':'serialNumber'}
+'Description':'Notes', 'Loaned To':'user', 'Loaned Date':'givenDate', 'Serial':'serialNumber', 'Make':'make', 'Hostname':'name'}
 class Command(BaseCommand):
 	help = 'migrating old database to new database'
 
@@ -55,8 +55,14 @@ class Command(BaseCommand):
 					constructor = globals()[idDict[name]]
 					obj = constructor()
 					obj.slug = (idDict[name]).lower()
+					obj.dateLastModified = row[6]
 				obj.token = row[0]
-				obj.qrcode = 'https://cims.nyu.edu/webapps/inventory/equipment/' +obj.token+'/edit' 
+				obj.room = row[10]
+				obj.building = row[9]
+				obj.qrcode = 'https://cims.nyu.edu/webapps/inventory/equipment/' +obj.token+'/edit'
+				if row[14] == 'Location Type' or row[14] == 'Cartridge Type' or row[14] == 'Printer Count' or row[14]=='Type' or row[14] =='Asset Tag':
+					continue
+				setattr(obj, fieldDict[row[14]], row[15]) 
 
 			else:
 				first = True

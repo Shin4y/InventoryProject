@@ -12,13 +12,13 @@ class commonObject(models.Model):
 	#locationType = models.CharField("Location Type", max_length=50, default = "", not used often in the last inventory system, I think I'm just going to leave this out. 
 	#	choices = LOCATION_CHOICES)
 	building = models.CharField("Building", max_length=50, default ='WWH', choices = BUILDING_CHOICES)
-	name = models.CharField("Name", max_length=50, default = "")
+	name = models.CharField("Name", max_length=255, default = "")
 	room = models.CharField("Room", max_length=50, default = "")
-	dateLastModified = models.DateTimeField("Date Last Modified", max_length=50, default = '2000-1-1')
+	dateLastModified = models.CharField("Date Last Modified", max_length=50, default = '2000-1-1')
 	lastUpdatedUser = models.CharField("Last Updated User", max_length=50, default = "")
 	Notes = models.CharField(max_length=200)
-	modelName = models.CharField("Model Name", max_length=50, default = "")
-	token = models.CharField(max_length=30, default = 0)
+	modelName = models.CharField("Model Name", max_length=255, default = "")
+	token = models.CharField(max_length=100, default = 0)
 	slug = models.SlugField(default = '', max_length = 256)
 	qrcode = models.CharField(max_length = 100, default = 'http://google.com')
 
@@ -32,24 +32,26 @@ class commonObjectForm(forms.ModelForm):
 
 class Desktops(commonObject):
 	user = models.CharField("User", max_length=50, default = "")
-	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
-	macAddress = models.CharField("Mac Address", max_length=50, default = "")
+	serialNumber = models.CharField("Serial Number", max_length=255, default = "")
+	macAddress = models.CharField("Mac Address", max_length=255, default = "")
 	IpAddress = models.CharField("IP Address", max_length=50, default = "")
 	OS = models.CharField("OS Type", max_length=50, default = "")
 	userType = models.CharField("User Type", max_length=50, default = "")
 
 class Macs(commonObject):
-	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
-	partNumber = models.CharField("Part Number", max_length=50, default = "")
-	modelNumber = models.CharField("Model Number", max_length=50, default = "")
-	size = models.CharField("Size", max_length=50, default = "")
-	manufactureYear = models.CharField("Manufactured Year", max_length=50, default = "")
-	appleCareNumber = models.CharField("AppleCare Registration Number", max_length=50, default = "")
-	designation = models.CharField("Designation", max_length=50, default = "")
-	user = models.CharField("Given To", max_length=50, default = "")
-	userType = models.CharField("User Type", max_length=50, default = "")
-	purchaseDate = models.CharField("Purchase Date", max_length=50, default = "")
-	purpose = models.CharField("Purpose", max_length=50, default = "")
+	serialNumber = models.CharField("Serial Number", max_length=255, default = "")
+	partNumber = models.CharField("Part Number", max_length=255, default = "")
+	modelNumber = models.CharField("Model Number", max_length=255, default = "")
+	size = models.CharField("Size", max_length=255, default = "")
+	manufactureYear = models.CharField("Manufactured Year", max_length=255, default = "")
+	appleCareNumber = models.CharField("AppleCare Registration Number", max_length=255, default = "")
+	appleCareExpirationDate = models.CharField("AppleCare Expiration Date", max_length=255, default = "")
+	designation = models.CharField("Designation", max_length=255, default = "")
+	user = models.CharField("Given To", max_length=255, default = "")
+	userType = models.CharField("User Type", max_length=255, default = "")
+	purchaseDate = models.CharField("Purchase Date", max_length=255, default = "")
+	purpose = models.CharField("Purpose", max_length=255, default = "")
+	givenDate = models.CharField("Given Date", max_length = 255, default = "")
 
 class Notebooks(commonObject):
 	user = models.CharField("User", max_length=50, default = "")
@@ -66,7 +68,7 @@ class Notebooks(commonObject):
 class Peripherals(commonObject):
 	user = models.CharField(max_length=50, default = "")
 	make = models.CharField(max_length=50, default = "")
-	givenDate = models.DateTimeField("Given Date", max_length=50, default = "2000-1-1")
+	givenDate = models.CharField("Given Date", max_length=50, default = "2000-1-1")
 
 
 class Printers(commonObject):

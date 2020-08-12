@@ -11,7 +11,10 @@ idDict = {'Stationary Projectors':'StationaryProjectors', 'Portable Projectors':
 fieldDict = {'Given To':'user', 'Model':'modelName', 'Machine Name':'name', 'Dell Tag':'serialNumber', 'Serial Num':'serialNumber',
 'Hardware (MAC) Address':'macAddress', 'Operating System':'OS', 'Comments':'Notes', 'OS Running':'OS','IP Address':'IpAddress',
 'HardwareAddress':'macAddress', 'Serial Number':'serialNumber', 'User':'user', 'Hardware Address':'macAddress', 'Bulb':'bulb', 'Name':'name',
-'Model #':'serialNumber', 'Caretaker':'user', 'OS':'OS', 'User Type':'userType', 'Notes':'Notes', 'Printer Name':'name'}
+'Model #':'serialNumber', 'Caretaker':'user', 'OS':'OS', 'User Type':'userType', 'Notes':'Notes', 'Printer Name':'name', 'Part Number':'partNumber',
+'Model Number':'modelNumber', 'Model Name':'modelName', 'Manufacture Year':'manufactureYear', 'Size':'size', 'AppleCare Registration Number':'appleCareNumber',
+'Designation':'name', 'Given Date':'givenDate', 'AppleCare Expiration Date':'appleCareExpirationDate', 'Purchase Date':'purchaseDate', 'Purpose':'purpose', 'Printer Type':'modelName',
+'Description':'Notes', 'Loaned To':'user', 'Loaned Date':'givenDate', 'Serial':'serialNumber'}
 class Command(BaseCommand):
 	help = 'migrating old database to new database'
 
@@ -38,12 +41,13 @@ class Command(BaseCommand):
 		data = cur.fetchall()
 		first = False
 		for row in data:
+			print(row)
 			if row[1] != '':
 				if first:
 					obj.save()
 				cur.execute("SELECT * FROM inv_categories WHERE _id__$oid =" +"'"+row[1]+"'")
 				cat = cur.fetchall()
-				print(len(cat))
+				
 				for row in cat:
 					if row[5] == "Supplies" or row[5] == "Software":
 						continue 
@@ -53,8 +57,9 @@ class Command(BaseCommand):
 
 			else:
 				first = True
-				if row[14] == 'Location Type' or 'Cartridge Type':
+				if row[14] == 'Location Type' or row[14] == 'Cartridge Type' or row[14] == 'Printer Count' or row[14]=='Type' or row[14] =='Asset Tag':
 					continue
+				print(row[14])
 				setattr(obj, fieldDict[row[14]], row[15])
 
 

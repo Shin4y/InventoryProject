@@ -48,12 +48,15 @@ class Command(BaseCommand):
 				cur.execute("SELECT * FROM inv_categories WHERE _id__$oid =" +"'"+row[1]+"'")
 				cat = cur.fetchall()
 				
-				for row in cat:
-					if row[5] == "Supplies" or row[5] == "Software":
+				for subrow in cat:
+					if subrow[5] == "Supplies" or subrow[5] == "Software":
 						continue 
-					name = row[1]
+					name = subrow[1]
 					constructor = globals()[idDict[name]]
 					obj = constructor()
+					obj.slug = (idDict[name]).lower()
+				obj.token = row[0]
+				obj.qrcode = 'http://http://127.0.0.1:8000/inventory/equipment/' + 'id=' + obj.token+'/edit' 
 
 			else:
 				first = True

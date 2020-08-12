@@ -7,7 +7,7 @@ app_name = 'inventory'
 
 urlpatterns = [
 	path('', views.index, name = 'index'),
-	path('id=<str:secret_id>/', views.editObject, name = 'editObject'),
+	path('/webapps/inventory/equipment/id=<str:secret_id>/edit', views.editObject, name = 'editObject'),
 	path('<slug:mySlug>/create/', views.createObject, name = 'createObject'),
 	path('<slug:mySlug>/', views.displayAllObjects, name = 'displayAllObjects'),
 	path('<slug:mySlug>/sort=<str:sortBy>/', views.displayAllObjects, name = 'displayAllObjects'),

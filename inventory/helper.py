@@ -141,3 +141,14 @@ def zipFields(data):#zipping the room field and the owner field together
 
 	return zip(list1, list2)
 
+def camelCasing(words):
+	listOfWords = words.split()
+	result = ""
+	flag = True
+	for word in listOfWords:
+		if flag == True:
+			result = result + word.lower()
+			flag = False
+		else:
+			result = result + word.capitalize()
+	return result

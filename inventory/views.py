@@ -84,8 +84,9 @@ def displayAllObjects(request, mySlug, sortBy = 'building'):
 	listOfFields = getListOfFields(mySlug)
 	
 	allSubObjects = getAllSubObjects(mySlug)
+	sortBy = camelCasing(sortBy)
 	if(sortBy != ''):
-		allSubObjects.sort(key=lambda x: getattr(x, sortBy), reverse = True)
+		allSubObjects.sort(key=lambda x: getattr(x, sortBy), reverse = False)
 	bigList, tokenList = ([] for i in range(2))
 	getDisplayData(allSubObjects, bigList)
 	getTokens(allSubObjects, tokenList)

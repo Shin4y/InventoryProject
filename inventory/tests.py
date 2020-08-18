@@ -96,10 +96,10 @@ class ObjectTestCase(TestCase):
 	#	self.assertFalse(form.is_valid())
 	#	self.assertEqual(form.errors['name1'][0], 'It is invalid')
 
-	def testFaviconIcon(self):
+	def testFaviconIcon(self): #I feel like because this functionality is so simple, there is no point in implementing test rn
 		return
 
-	def testToStorage(self):
+	def testToStorage(self): #ditto
 		return
 
 # Create your tests here.

@@ -42,9 +42,8 @@ def editObject(request, secret_id):
 	#if slugIsValid(mySlug) != True:
 	#	return HttpResponseNotFound(mySlug.capitalize() + " is not a valid object.")
 	editObject = commonObject.objects.get(token = secret_id)
-	mySlug = editObject.slug
-	editObject = getattr(editObject, mySlug)
-	objectName = re.sub("([a-z])([A-Z])","\g<1> \g<2>", mySlug) #splitting up words and lowercasing
+	editObject = getattr(editObject, editObject.slug)
+	objectName = re.sub("([a-z])([A-Z])","\g<1> \g<2>", editObject.slug) #splitting up words and lowercasing
 	objectName = objectName.lower()
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:

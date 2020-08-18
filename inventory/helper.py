@@ -61,10 +61,11 @@ def getListOfFields(mySlug): #getting field names for the table in displayAll.ht
 	subObject = constructor()
 	listOfFields = list()
 	for key in subObject._meta.fields:
-		if dontEdit(key.name) != True and key.name != "dateLastModified":
+		if dontEdit(key.name) != True:
 			key.name = re.sub("([a-z])([A-Z])","\g<1> \g<2>", key.name)
 			listOfFields.append(key.name.title())
-
+	
+	listOfFields.append('Date Last Modified')
 	return listOfFields
 
 def getDisplayData(allSubObjects, bigList): #gets data from objects to be displayed in displayAll view/template
@@ -141,7 +142,7 @@ def zipFields(data):#zipping the room field and the owner field together
 
 	return zip(list1, list2)
 
-def camelCasing(words):
+def camelCasing(words): #convert field titles to camelcasing
 	listOfWords = words.split()
 	result = ""
 	flag = True

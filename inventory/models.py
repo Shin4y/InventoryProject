@@ -80,16 +80,16 @@ class Printers(commonObject):
 	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
 
 
-class StationaryProjectors(commonObject):
+class Stationaryprojectors(commonObject):
 	bulb =  models.CharField("Bulb", max_length=50)
 
 	
-class DesktopScanners(commonObject):
+class Desktopscanners(commonObject):
 	serialNumber = models.CharField("Serial Number", max_length=50, default = "")
 
 
 	
-class DataCenterEquipment(commonObject): #might get rid of later, theres only one entry from 2018
+class Datacenterequipment(commonObject): #might get rid of later, theres only one entry from 2018
 	macAddress = models.CharField("Mac Address", max_length=50, default = "")
 	Type = models.CharField("Type", max_length=50, default = "")
 	serialNumber = models.CharField("Serial Number", max_length=50, default = "")

@@ -52,7 +52,7 @@ def editObject(request, secret_id):
 
 		if f.is_valid():
 
-			formDataToObject(editObject, request.POST.items(), mySlug, False)
+			formDataToObject(editObject, request.POST.items(), editObject.slug, False)
 			
 			editObject.dateLastModified = datetime.datetime.now()
 
@@ -65,12 +65,14 @@ def editObject(request, secret_id):
 		f = createDynamicForm(editObject)
 
 		for field in f:
-			if dontEdit(field.name):
-				field.value = getattr(editObject, field.name)
+			if dontEdit(field.name) == False:
+				f.field_order.append(field.name)
 
+		f.field_order.remove('Notes')
+		f.field_order.append('Notes')
 		qrcode = editObject.qrcode
 
-		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': mySlug, 'qrcode':qrcode})
+		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': editObject.slug, 'qrcode':qrcode})
 
 
 def displayAllObjects(request, mySlug, sortBy = 'building'):

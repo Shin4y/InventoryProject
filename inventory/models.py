@@ -27,10 +27,12 @@ class commonObjectForm(forms.ModelForm):
 	field_order = []
 	class Meta:
 		model = commonObject
-		fields = ['name', 'building', 'room', 'Notes', 'modelName']
+		fields = ['building']
 
 #class objectManager(models.Model):
 
+class blankForm(forms.Form):
+	field_order = []
 
 class Desktops(commonObject):
 	user = models.CharField("User", max_length=50, default = "")

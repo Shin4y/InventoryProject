@@ -1,6 +1,7 @@
 from .models import *
 from operator import itemgetter, attrgetter
 import datetime, secrets, re, pyqrcode, copy
+from django import forms
 
 
 #LOCATION_CHOICES = [('Office', 'Office'), ('Lab', 'Lab'), ('Classroom', 'Classroom'), ('Other, Other')]
@@ -34,12 +35,14 @@ def formDataToObject(editObject, formData, mySlug, newObject):#Because forms are
 
 def createDynamicForm(subObject): #Creates general forms by reading all the fields of a model and creating corresponding fields
 	f = commonObjectForm()
+	#f = blankForm()
 	for key in subObject._meta.fields:
 		if dontEdit(key.name) == False:
-			if key.name != 'building' and key.name != 'qrcode': 
+			if key.name != 'building' and key.name != 'qrcode' and key.name != "Notes": 
 				f.fields[key.name] = forms.CharField(initial = getattr(subObject, key.name.replace(" ", "")), label = key.verbose_name)
 				# I dont know why the line above needs to strip white space, but it suddenly started happening so its staying there
-	f.fields['building'].initial = getattr(subObject, 'building')			
+	f.fields['building'].initial = getattr(subObject, 'building')
+	f.fields['Notes'] = forms.CharField(initial = getattr(subObject, 'Notes'), label = 'Notes', widget=forms.Textarea(attrs={'rows':'5', 'cols':'5'}))			
 	return f
 
 

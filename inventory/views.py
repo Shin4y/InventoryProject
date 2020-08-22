@@ -64,12 +64,12 @@ def editObject(request, secret_id):
 		f = commonObjectForm()
 		f = createDynamicForm(editObject)
 
-		for field in f:
-			if dontEdit(field.name) == False:
-				f.field_order.append(field.name)
+		# for field in f:
+		# 	if dontEdit(field.name) == False:
+		# 		f.field_order.append(field.name)
 
-		f.field_order.remove('Notes')
-		f.field_order.append('Notes')
+		# f.field_order.remove('Notes')
+		# f.field_order.append('Notes')
 		qrcode = editObject.qrcode
 
 		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': editObject.slug, 'qrcode':qrcode})

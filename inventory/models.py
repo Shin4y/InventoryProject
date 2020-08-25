@@ -14,15 +14,14 @@ class commonObject(models.Model):
 	building = models.CharField("Building", max_length=50, default ='WWH', choices = BUILDING_CHOICES)
 	name = models.CharField("Name", max_length=255, default = "")
 	room = models.CharField("Room", max_length=50, default = "")
-	dateLastModified = models.CharField("Date Last Modified", max_length=50, default = '2000-1-1')
 	lastUpdatedUser = models.CharField("Last Updated User", max_length=50, default = "")
 	modelName = models.CharField("Model Name", max_length=255, default = "")
 	token = models.CharField(max_length=100, default = 0)
 	slug = models.SlugField(default = '', max_length = 256)
-	dateLastModified = models.CharField("Date Last Modified", max_length=50, default = '2000-1-1')
+	dateLastModified = models.CharField("Date Last Modified", max_length=50, default = '1581370547000')
 	Notes = models.CharField(max_length=200)
 	qrcode = models.CharField(max_length = 100, default = 'http://google.com')
-
+ 
 class commonObjectForm(forms.ModelForm):
 	field_order = []
 	class Meta:

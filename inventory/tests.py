@@ -3,10 +3,10 @@ from inventory.models import *
 from django.urls import reverse
 
 testData = {'name':'test', 'building':'WWH', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
- 'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
+ 'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test', 'dateLastModified':'1581370547000'}
 
 testDataUpdate = {'name':'updated', 'building':'WWH', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
- 'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}
+ 'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test', 'dateLastModified':'1581370547000'}
 
 testData2 = {'name':'desktop1', 'building':'WWH', 'room':'test', 'Notes':'test', 'modelName':'test', 'user':'test',
  'serialNumber':'1234', 'macAddress':'1234', 'OS':'test', 'userType':'test'}

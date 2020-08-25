@@ -4,6 +4,7 @@ from django.urls import reverse
 import datetime, secrets
 from .helper import *
 from .models import *
+from .forms import *
 from collections import OrderedDict
 from operator import itemgetter, attrgetter
 from django.forms import formset_factory
@@ -18,7 +19,7 @@ def createObject(request, mySlug):
 
 	constructor = globals()[mySlug.capitalize()]
 	subObject = constructor()
-	myList = list()
+	#myList = list()
 	if request.method == 'POST':
 		f = commonObjectForm(request.POST)
 		if f.is_valid():
@@ -28,7 +29,7 @@ def createObject(request, mySlug):
 
 	# if a GET (or any other method) we'll create a blank form
 	else:
-		f = commonObjectForm()
+		#f = commonObjectForm()
 		f = createDynamicForm(subObject)
 
 		objectName = re.sub("([a-z])([A-Z])","\g<1> \g<2>", mySlug)
@@ -39,8 +40,6 @@ def createObject(request, mySlug):
 
 def editObject(request, secret_id):
 
-	#if slugIsValid(mySlug) != True:
-	#	return HttpResponseNotFound(mySlug.capitalize() + " is not a valid object.")
 	editObject = commonObject.objects.get(token = secret_id)
 	editObject = getattr(editObject, editObject.slug)
 	objectName = re.sub("([a-z])([A-Z])","\g<1> \g<2>", editObject.slug) #splitting up words and lowercasing
@@ -57,11 +56,11 @@ def editObject(request, secret_id):
 			editObject.dateLastModified = datetime.datetime.now()
 
 			editObject.save()
-			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
+			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (editObject.slug,)))
 
 	# if a GET (or any other method) we'll create a blank form
 	else:
-		f = commonObjectForm()
+		#f = commonObjectForm()
 		f = createDynamicForm(editObject)
 
 		# for field in f:
@@ -70,9 +69,9 @@ def editObject(request, secret_id):
 
 		# f.field_order.remove('Notes')
 		# f.field_order.append('Notes')
-		qrcode = editObject.qrcode
+		
 
-		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': editObject.slug, 'qrcode':qrcode})
+		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': editObject.slug, 'qrcode':editObject.qrcode})
 
 
 def displayAllObjects(request, mySlug, sortBy = 'building'):

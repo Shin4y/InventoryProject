@@ -1,5 +1,6 @@
 from django import forms
 from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field
 
 class BatchForm(forms.Form): #a form used to swap name 1 and name 2 machines. names refer to the name field of said machines
 	name1 = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Name 1'}))
@@ -33,4 +34,3 @@ class BatchForm(forms.Form): #a form used to swap name 1 and name 2 machines. na
 				forms.CharField()
 			self.fields['extra_owner_{index}'.format(index=index)] = forms.CharField()
 
-class EditForm(forms.Form):

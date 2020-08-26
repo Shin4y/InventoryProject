@@ -74,8 +74,9 @@ def editObject(request, secret_id):
 		return render(request, 'inventory/editObject.html', {'form': f, 'objectName': objectName, 'token': editObject.token, 'mySlug': editObject.slug, 'qrcode':editObject.qrcode})
 
 
-def displayAllObjects(request, mySlug, sortBy = 'building'):
-	
+def displayAllObjects(request, mySlug, sortBy = 'building', reverse = 'F'):
+	boolDef = {'F':False, 'T':True}
+
 	if slugIsValid(mySlug) != True:
 		return HttpResponseNotFound(mySlug.capitalize() + " is not a valid object.")
 
@@ -83,17 +84,20 @@ def displayAllObjects(request, mySlug, sortBy = 'building'):
 	objectname = objectName.lower()
 	listOfFields = getListOfFields(mySlug)
 	
-	allSubObjects = getAllSubObjects(mySlug)
+	allSubObjects = getAllSubObjects(mySlug) 
 	sortBy = camelCasing(sortBy)
-	if(sortBy != ''):
-		allSubObjects.sort(key=lambda x: getattr(x, sortBy), reverse = False)
+	if sortBy != '':
+		allSubObjects.sort(key=lambda x: getattr(x, sortBy), reverse = boolDef[reverse])
 	bigList, tokenList = ([] for i in range(2))
 	getDisplayData(allSubObjects, bigList)
 	getTokens(allSubObjects, tokenList)
 
 	masterList = zip(bigList, tokenList)
-
-	return render(request, 'inventory/displayAll.html', {'data':masterList, 'objectName': objectName, 'listOfFields':listOfFields, 'mySlug':mySlug})
+	if reverse == 'F':
+		reverse = 'T'
+	else:
+		reverse = 'F'
+	return render(request, 'inventory/displayAll.html', {'data':masterList, 'objectName': objectName, 'listOfFields':listOfFields, 'mySlug':mySlug, 'reverseFlag':reverse})
 			#data is a 2d list of object data}
 	#listOfFields is a list of field strings to put at the top of the table
 

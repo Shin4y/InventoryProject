@@ -1,33 +1,113 @@
-{% extends "inventory/base.html" %}
-
+{% extends 'inventory/base.html' %}
+{% load crispy_forms_tags %}
+{% load qr_tags %}
 {% block title %} Inventory {% endblock %}
 
 {% block content %}
+<div class = 'container'>
+	<div class = 'row'>
+		<div class = 'col-md-3'>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title">Desktops</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <a href="#" class="card-link">Card link</a>
+		    <a href="#" class="card-link">Another link</a>
+		  </div>
+		</div>
+		</div>
+	
+		<div class = 'col-md-3'>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title">Printers</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <a href="#" class="card-link">Card link</a>
+		    <a href="#" class="card-link">Another link</a>
+		  </div>
+		</div>
+		</div>
 
-<div class = "container"> 
-<ul class = "list-group">
-	<a href = "{% url 'inventory:displayAllObjects' 'desktops' %} " class="list-group-item list-group-item-action"> Desktops </a>
-	<a href = "{% url 'inventory:displayAllObjects' 'notebooks' %}" class="list-group-item list-group-item-action"> Notebooks </a>
-	<a href = "{% url 'inventory:displayAllObjects' 'printers' %}" class="list-group-item list-group-item-action"> Printers </a>
-	<a href = "{% url 'inventory:displayAllObjects' 'peripherals' %}" class="list-group-item list-group-item-action"> Peripherals </a>
-	<a href = "{% url 'inventory:displayAllObjects' 'stationaryprojectors' %}" class="list-group-item list-group-item-action"> Stationary Projectors </a>
-	<a href = "{% url 'inventory:displayAllObjects' 'desktopscanners' %}" class="list-group-item list-group-item-action"> Desktop Scanners </a>
-	<a href = "{% url 'inventory:displayAllObjects' 'datacenterequipment' %}" class="list-group-item list-group-item-action"> Data Center Equipment </a>
-	<div class="dropdown">
-	  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    Batch Replace
-	  </button>
-	  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'desktops' %}">Desktops</a>
-	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'notebooks' %}">Notebooks</a>
-	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'printers' %}">Printers</a>
-	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'peripherals' %}">Peripherals</a>
-	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'stationaryprojectors' %}">Stationary Projectors</a>
-	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'desktopscanners' %}">Desktop Scanners</a>
-	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'datacenterequipment' %}">Data Center Equipment</a>
 
-	  </div>
+		<div class = 'col-md-3'>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title">Notebooks</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <a href="#" class="card-link">Card link</a>
+		    <a href="#" class="card-link">Another link</a>
+		  </div>
+		</div>
+		</div>
+	
+
+		<div class = 'col-md-3'>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title">Macs</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <a href="#" class="card-link">Card link</a>
+		    <a href="#" class="card-link">Another link</a>
+		  </div>
+		</div>
+		</div>
 	</div>
-</ul>
+
+	<div class = 'row'>
+		<div class = 'col-md-3'>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title">Peripherals</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <a href="#" class="card-link">Card link</a>
+		    <a href="#" class="card-link">Another link</a>
+		  </div>
+		</div>
+		</div>
+
+		<div class = 'col-md-3'>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title">Desktop Scanners</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <a href="#" class="card-link">Card link</a>
+		    <a href="#" class="card-link">Another link</a>
+		  </div>
+		</div>
+		</div>
+
+
+		<div class = 'col-md-3'>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title">Stationary Projectors</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <a href="#" class="card-link">Card link</a>
+		    <a href="#" class="card-link">Another link</a>
+		  </div>
+		</div>
+		</div>
+
+
+		<div class = 'col-md-3'>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title">Data Center Equipment</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <a href="#" class="card-link">Card link</a>
+		    <a href="#" class="card-link">Another link</a>
+		  </div>
+		</div>
+		</div>
+	</div>
+
 </div>
 {% endblock %}

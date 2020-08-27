@@ -1,0 +1,33 @@
+{% extends "inventory/base.html" %}
+
+{% block title %} Inventory {% endblock %}
+
+{% block content %}
+
+<div class = "container"> 
+<ul class = "list-group">
+	<a href = "{% url 'inventory:displayAllObjects' 'desktops' %} " class="list-group-item list-group-item-action"> Desktops </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'notebooks' %}" class="list-group-item list-group-item-action"> Notebooks </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'printers' %}" class="list-group-item list-group-item-action"> Printers </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'peripherals' %}" class="list-group-item list-group-item-action"> Peripherals </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'stationaryprojectors' %}" class="list-group-item list-group-item-action"> Stationary Projectors </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'desktopscanners' %}" class="list-group-item list-group-item-action"> Desktop Scanners </a>
+	<a href = "{% url 'inventory:displayAllObjects' 'datacenterequipment' %}" class="list-group-item list-group-item-action"> Data Center Equipment </a>
+	<div class="dropdown">
+	  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    Batch Replace
+	  </button>
+	  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'desktops' %}">Desktops</a>
+	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'notebooks' %}">Notebooks</a>
+	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'printers' %}">Printers</a>
+	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'peripherals' %}">Peripherals</a>
+	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'stationaryprojectors' %}">Stationary Projectors</a>
+	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'desktopscanners' %}">Desktop Scanners</a>
+	    <a class="dropdown-item" href="{% url 'inventory:batchReplace' 'datacenterequipment' %}">Data Center Equipment</a>
+
+	  </div>
+	</div>
+</ul>
+</div>
+{% endblock %}

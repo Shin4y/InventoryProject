@@ -104,6 +104,10 @@ class Printercartridges(commonObject):
 
 ##########################################################################################
 
+## Following models are not related to physical inventory objects ##
+
+class RecentObject(models.Model):
+	commonId = models.IntegerField() ## corresponds to commonobject id field
 
 
 	

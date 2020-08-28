@@ -156,3 +156,14 @@ def camelCasing(words): #convert field titles to camelcasing
 		else:
 			result = result + word.capitalize()
 	return result
+
+def recordRecent(obj):
+	recentObj = RecentObject(commonId=recentObj.id)
+	recentObj.save()
+
+def getRecent():
+	slugDict = {'desktops':0,'printers':1,'notebooks':2, 'macs':3,'peripherals':4,'desktopscanners':5,'stationaryprojectors':6,'datacenterequipment':7}
+	t = [list() for i in range(8)] #indices match up with the order of cards in index, left->right and top->bottom
+	allRecent = RecentObject.objects.all()
+	for obj in allRecent:
+		t[slugDict[obj.mySlug]]

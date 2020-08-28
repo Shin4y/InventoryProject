@@ -25,6 +25,7 @@ def createObject(request, mySlug):
 		if f.is_valid():
 			formDataToObject(subObject, request.POST.items(), mySlug, True) #inserts the request data into object, and takes care of token, date, and slug as well
 			subObject.save()
+			recordRecent(subObject)
 			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
 
 	# if a GET (or any other method) we'll create a blank form
@@ -56,6 +57,7 @@ def editObject(request, secret_id):
 			editObject.dateLastModified = datetime.datetime.now()
 
 			editObject.save()
+			recordRecent(editObject)
 			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (editObject.slug,)))
 
 	# if a GET (or any other method) we'll create a blank form
@@ -117,6 +119,8 @@ def batchReplace(request, mySlug):
 			for item1, item2 in data: #actually swaps the rooms.
 				y = commonObject.objects.get(name = item1)
 				z = commonObject.objects.get(name = item2)
+				recordRecent(y)
+				recordRecent(z)
 				swapRoom(getattr(y, mySlug), getattr(z, mySlug))
 				
 			return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))
@@ -144,4 +148,5 @@ def toStorage(request, mySlug, name, room, building): #moves object to storage.
 	except AttributeError:
 		pass
 	obj.save()
+	recordRecent(obj)
 	return HttpResponseRedirect(reverse('inventory:displayAllObjects', args = (mySlug,)))

@@ -166,4 +166,14 @@ def getRecent():
 	t = [list() for i in range(8)] #indices match up with the order of cards in index, left->right and top->bottom
 	allRecent = RecentObject.objects.all()
 	for obj in allRecent:
-		t[slugDict[obj.slug]] = obj
+		if len(t[slugDict[obj.slug]]) < 6:
+			t[slugDict[obj.slug]] = getattr(commonObject.objects.get(id=obj.commonId), obj.slug)
+
+	return t
+
+
+
+
+
+
+

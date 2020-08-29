@@ -158,7 +158,7 @@ def camelCasing(words): #convert field titles to camelcasing
 	return result
 
 def recordRecent(obj, mySlug):
-	recentObj = RecentObject(commonId=recentObj.id, slug=mySlug)
+	recentObj = RecentObject(commonId=obj.id, slug=mySlug)
 	recentObj.save()
 
 def getRecent():

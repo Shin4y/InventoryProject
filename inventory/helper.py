@@ -167,8 +167,8 @@ def getRecent():
 	allRecent = RecentObject.objects.all()
 	for obj in allRecent:
 		if len(t[slugDict[obj.slug]]) < 6:
-			t[slugDict[obj.slug]] = getattr(commonObject.objects.get(id=obj.commonId), obj.slug)
-
+			t[slugDict[obj.slug]].append(getattr(commonObject.objects.get(id=obj.commonId), obj.slug))
+	
 	return t
 
 

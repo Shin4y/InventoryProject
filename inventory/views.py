@@ -12,6 +12,7 @@ from django.forms import formset_factory
 
 def index(request):
 	recent2DList = getRecent()
+	jjjjjj
 	return render(request, 'inventory/index.html', {'recentList':recent2DList})
 
 def createObject(request, mySlug):

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'inventory.apps.InventoryConfig',
     'crispy_forms',
-    'qrcode'
+    'qrcode',
 
 ]
 
@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'inventoryProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        #'ENGINE':'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'inventoryDatabase',
-        'USER': 'postgres',
-        'PASSWORD': 'TeamCaptain1!',
+        #'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE':'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'NAME': 'inventoryDatabase',
+        #'USER': 'postgres',
+        #'PASSWORD': 'TeamCaptain1!',
         'HOST': 'localhost',
         'PORT': '5432',
     }

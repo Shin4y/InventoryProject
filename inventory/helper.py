@@ -157,8 +157,8 @@ def camelCasing(words): #convert field titles to camelcasing
 			result = result + word.capitalize()
 	return result
 
-def recordRecent(obj):
-	recentObj = RecentObject(commonId=recentObj.id)
+def recordRecent(obj, mySlug):
+	recentObj = RecentObject(commonId=recentObj.id, slug=mySlug)
 	recentObj.save()
 
 def getRecent():
@@ -166,4 +166,4 @@ def getRecent():
 	t = [list() for i in range(8)] #indices match up with the order of cards in index, left->right and top->bottom
 	allRecent = RecentObject.objects.all()
 	for obj in allRecent:
-		t[slugDict[obj.mySlug]]
+		t[slugDict[obj.slug]] = obj

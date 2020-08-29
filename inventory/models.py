@@ -108,6 +108,6 @@ class Printercartridges(commonObject):
 
 class RecentObject(models.Model):
 	commonId = models.IntegerField() ## corresponds to commonobject id field
-
+	slug = models.SlugField()
 
 	

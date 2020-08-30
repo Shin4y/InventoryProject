@@ -56,7 +56,7 @@ def editObject(request, secret_id):
 
 			formDataToObject(editObject, request.POST.items(), editObject.slug, False)
 			
-			editObject.dateLastModified = datetime.datetime.now()
+			
 
 			editObject.save()
 			recordRecent(editObject, editObject.slug)

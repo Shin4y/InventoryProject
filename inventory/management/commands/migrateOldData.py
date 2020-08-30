@@ -1,8 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from inventory.models import *
-import csv
-import sqlite3
-import sys
+import csv, sqlite3, sys, datetime
 from sqlite3 import Error
 
 idDict = {'Stationary Projectors':'Stationaryprojectors', 'Portable Projectors':'Peripherals', 'Projector Lamps':
@@ -61,6 +59,8 @@ class Command(BaseCommand):
 					constructor = globals()[idDict[name]]
 					obj = constructor()
 					obj.slug = (idDict[name]).lower()
+					#time = datetime.datetime.fromtimestamp(int(row[6])/1000)
+					#obj.dateLastModified = time.strftime("%m/%d/%y")
 					obj.dateLastModified = row[6]
 				obj.token = row[0]
 				obj.room = row[10]

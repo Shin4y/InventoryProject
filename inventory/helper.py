@@ -1,6 +1,7 @@
 from .models import *
 from operator import itemgetter, attrgetter
 import datetime, secrets, re, pyqrcode, copy
+from time import time
 from django import forms
 
 
@@ -25,7 +26,7 @@ def formDataToObject(editObject, formData, mySlug, newObject):#Because forms are
 		if key != 'csrfmiddlewaretoken':
 			setattr(editObject, key, val)
 
-	editObject.dateLastModified = datetime.datetime.now()
+	editObject.dateLastModified = int(time() * 1000)
 	if newObject == True:
 		editObject.slug = mySlug
 		editObject.token = secrets.token_urlsafe(20)
@@ -82,6 +83,7 @@ def getDisplayData(allSubObjects, bigList): #gets data from objects to be displa
 					first = False
 			time = datetime.datetime.fromtimestamp(int(obj.dateLastModified)/1000)
 			smallList.append(time.strftime("%m/%d/%y"))
+			#smallList.append(obj.dateLastModified)
 			bigList.append(smallList)
 
 	return 
